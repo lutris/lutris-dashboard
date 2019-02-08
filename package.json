@@ -1,9 +1,9 @@
 {
-  "name": "vue-element-admin",
-  "version": "3.10.0",
-  "description": "A magical vue admin. Typical templates for enterprise applications. Newest development stack of vue. Lots of awesome features",
-  "author": "Pan <panfree23@gmail.com>",
-  "license": "MIT",
+  "name": "lutris-dashboard",
+  "version": "0.0.1",
+  "description": "A dashboard for lutris moderators. Used to publish installers and such.",
+  "author": "Mathieu Comandon <strycore@gmail.com>",
+  "license": "GPL-3.0",
   "scripts": {
     "dev": "cross-env BABEL_ENV=development webpack-dev-server --inline --progress --config build/webpack.dev.conf.js",
     "build:prod": "cross-env NODE_ENV=production env_config=prod node build/build.js",
@@ -19,19 +19,13 @@
       "git add"
     ]
   },
-  "keywords": [
-    "vue",
-    "element-ui",
-    "admin",
-    "management-system",
-    "admin-template"
-  ],
+  "keywords": [],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/PanJiaChen/vue-element-admin.git"
+    "url": "git+https://github.com/lutris/lutris-dashboard.git"
   },
   "bugs": {
-    "url": "https://github.com/PanJiaChen/vue-element-admin/issues"
+    "url": "https://github.com/lutris/lutris-dashboard/issues"
   },
   "dependencies": {
     "axios": "0.18.0",
@@ -59,8 +53,7 @@
     "vue-router": "3.0.2",
     "vue-splitpane": "1.0.2",
     "vuedraggable": "^2.16.0",
-    "vuex": "3.0.1",
-    "xlsx": "^0.11.16"
+    "vuex": "3.0.1"
   },
   "devDependencies": {
     "autoprefixer": "8.5.0",
