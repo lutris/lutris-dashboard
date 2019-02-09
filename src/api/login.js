@@ -12,19 +12,10 @@ export function loginByUsername(username, password) {
   })
 }
 
-export function logout() {
-  // That doesn't need an API call, just deleting the token
-  return request({
-    url: '/api/',
-    method: 'post'
-  })
-}
-
-export function getUserInfo(token) {
+export function getUserInfo() {
   return request({
     url: '/api/users/me',
-    method: 'get',
-    params: { token }
+    method: 'get'
   })
 }
 

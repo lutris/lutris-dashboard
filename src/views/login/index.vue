@@ -102,6 +102,7 @@ export default {
           this.loading = true
           this.$store.dispatch('LoginByUsername', this.loginForm).then(() => {
             this.loading = false
+            console.log('Login succesfull, redirecting')
             this.$router.push({ path: this.redirect || '/' })
           }).catch(() => {
             console.error('Failed to login')

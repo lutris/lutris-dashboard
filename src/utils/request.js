@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { Message, MessageBox } from 'element-ui'
+import { Message } from 'element-ui'
 import store from '@/store'
 import { getToken } from '@/utils/auth'
 
@@ -15,14 +15,14 @@ service.interceptors.request.use(
     // Do something before request is sent
     if (store.getters.token) {
       console.log('Setting token in headers')
-      config.headers['X-Token'] = getToken()
-    } else {
-      console.log('No token to set')
+      config.headers['Authorization'] = 'Token ' + getToken()
+      config.headers['Accept'] = 'Application/json'
     }
     return config
   },
   error => {
     // Do something with request error
+    console.log('Failed to set headers')
     console.log(error) // for debug
     Promise.reject(error)
   }
@@ -33,35 +33,18 @@ service.interceptors.response.use(
   response => {
     const res = response.data
     if (!res) {
-      console.log('ahah, you suck because there is no res')
-      console.log(service)
-      console.log(process.env.BASE_API)
-      return
-    }
-    if (res.code !== 20000) {
       Message({
-        message: res.message,
+        message: 'Failed to get response',
         type: 'error',
         duration: 5 * 1000
       })
-      if (res.code === 50008 || res.code === 50012 || res.code === 50014) {
-        MessageBox.confirm('bliblublublu', 'bliblublublubul', {
-          confirmButtonText: 'Confirm',
-          cancelButtonText: 'Cancel',
-          type: 'warning'
-        }).then(() => {
-          store.dispatch('FedLogOut').then(() => {
-            location.reload()
-          })
-        })
-      }
-      return Promise.reject('error')
+      return Promise.reject('Server error')
     } else {
-      return response.data
+      return response
     }
   },
   error => {
-    console.log('err' + error) // for debug
+    console.log('Error getting response from server: ' + error)
     Message({
       message: error.message,
       type: 'error',

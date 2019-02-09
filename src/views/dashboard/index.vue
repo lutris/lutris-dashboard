@@ -1,11 +1,11 @@
 <template>
   <div class="dashboard-container">
-    <component :is="currentRole"/>
+    <!-- <component :is="currentRole"/> -->
   </div>
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+// import { mapGetters } from 'vuex'
 import adminDashboard from './admin'
 import editorDashboard from './editor'
 
@@ -17,15 +17,10 @@ export default {
       currentRole: 'adminDashboard'
     }
   },
-  computed: {
-    ...mapGetters([
-      'roles'
-    ])
-  },
+  computed: {},
   created() {
-    if (!this.roles.includes('admin')) {
-      this.currentRole = 'editorDashboard'
-    }
+    console.log('Creating dashboard')
+    this.currentRole = 'editorDashboard'
   }
 }
 </script>
