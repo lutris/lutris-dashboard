@@ -6,22 +6,23 @@ export function loginByUsername(username, password) {
     password
   }
   return request({
-    url: '/login/login',
+    url: '/api/accounts/token',
     method: 'post',
     data
   })
 }
 
 export function logout() {
+  // That doesn't need an API call, just deleting the token
   return request({
-    url: '/login/logout',
+    url: '/api/',
     method: 'post'
   })
 }
 
 export function getUserInfo(token) {
   return request({
-    url: '/user/info',
+    url: '/api/users/me',
     method: 'get',
     params: { token }
   })
