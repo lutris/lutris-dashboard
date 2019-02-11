@@ -80,18 +80,17 @@ export default new Router({
 })
 
 export const asyncRouterMap = [
-  /** When your routing table is too long, you can split it into small modules**/
-  // {
-  //   path: '/installers',
-  //   component: Layout,
-  //   children: [
-  //     {
-  //       path: 'index',
-  //       component: () => import('@/views/installers/index'),
-  //       name: 'Installers',
-  //       meta: { title: 'icons', icon: 'icon', noCache: true }
-  //     }
-  //   ]
-  // },
+  {
+    path: '/installers',
+    component: Layout,
+    children: [
+      {
+        path: 'index',
+        component: () => import('@/views/installers/index'),
+        name: 'Installers',
+        meta: { title: 'installers', icon: 'icon', noCache: true }
+      }
+    ]
+  },
   { path: '*', redirect: '/404', hidden: true }
 ]
