@@ -95,6 +95,13 @@ export const asyncRouterMap = [
         component: () => import('@/views/installers/submissions'),
         name: 'Submissions',
         meta: { title: 'submissions', noCache: true }
+      },
+      {
+        path: 'submissions/:id(\\d+)',
+        component: () => import('@/views/installers/submission'),
+        name: 'Submission',
+        meta: { title: 'submission', noCache: true },
+        hidden: true
       }
     ]
   },
