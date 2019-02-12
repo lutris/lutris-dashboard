@@ -82,13 +82,19 @@ export default new Router({
 export const asyncRouterMap = [
   {
     path: '/installers',
+    redirect: '/installers/submissions',
     component: Layout,
+    name: 'Installers',
+    meta: {
+      title: 'example',
+      icon: 'example'
+    },
     children: [
       {
-        path: 'index',
-        component: () => import('@/views/installers/index'),
-        name: 'Installers',
-        meta: { title: 'installers', icon: 'icon', noCache: true }
+        path: 'submissions',
+        component: () => import('@/views/installers/submissions'),
+        name: 'Submissions',
+        meta: { title: 'submissions', noCache: true }
       }
     ]
   },
