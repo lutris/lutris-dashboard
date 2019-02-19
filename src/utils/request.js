@@ -12,18 +12,15 @@ const service = axios.create({
 // request interceptor
 service.interceptors.request.use(
   config => {
-    // Do something before request is sent
     if (store.getters.token) {
-      console.log('Setting token in headers')
       config.headers['Authorization'] = 'Token ' + getToken()
       config.headers['Accept'] = 'Application/json'
     }
     return config
   },
   error => {
-    // Do something with request error
     console.log('Failed to set headers')
-    console.log(error) // for debug
+    console.log(error)
     Promise.reject(error)
   }
 )
@@ -31,14 +28,13 @@ service.interceptors.request.use(
 // response interceptor
 service.interceptors.response.use(
   response => {
-    const res = response.data
-    if (!res) {
+    if (response.status > 299) {
       Message({
         message: 'Failed to get response',
         type: 'error',
-        duration: 5 * 1000
+        duration: 5000
       })
-      return Promise.reject('Server error')
+      return Promise.reject(`Server responded with status ${response.status}`)
     } else {
       return response
     }
@@ -48,7 +44,7 @@ service.interceptors.response.use(
     Message({
       message: error.message,
       type: 'error',
-      duration: 5 * 1000
+      duration: 5000
     })
     return Promise.reject(error)
   }

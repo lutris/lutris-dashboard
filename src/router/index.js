@@ -86,8 +86,8 @@ export const asyncRouterMap = [
     component: Layout,
     name: 'Installers',
     meta: {
-      title: 'example',
-      icon: 'example'
+      title: 'Installers',
+      icon: 'list'
     },
     children: [
       {
@@ -95,6 +95,12 @@ export const asyncRouterMap = [
         component: () => import('@/views/installers/submissions'),
         name: 'Submissions',
         meta: { title: 'submissions', noCache: true }
+      },
+      {
+        path: 'submissions/drafts',
+        component: () => import('@/views/installers/drafts'),
+        name: 'Drafts',
+        meta: { title: 'drafts', noCache: true }
       },
       {
         path: 'submissions/:id(\\d+)',
