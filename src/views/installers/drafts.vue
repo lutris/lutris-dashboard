@@ -26,7 +26,6 @@ export default {
     getDrafts() {
       this.draftsLoading = true
       fetchDrafts().then(response => {
-        console.log(response)
         this.drafts = []
         for (let i = 0; i < response.data.results.length; i++) {
           const draft = response.data.results[i]

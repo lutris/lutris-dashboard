@@ -4,6 +4,7 @@
       <h1>{{ submission.name }} ({{ submission.year }})</h1>
       <p>Submission for <strong>{{ submission.slug }}</strong> by {{ submission.user }} on {{ submittedAt }}</p>
       <p v-if="submission.draft">This submission is a draft, it may not be complete yet.</p>
+      <p>{{submission.reason}}</p>
       <div>
         <strong>Runner</strong>
         <div class="prettydiff" v-html="runnerDiff" />
