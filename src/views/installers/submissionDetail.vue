@@ -1,7 +1,13 @@
 <template>
   <div>
     <div v-if="submission">
-      <h1>{{ submission.name }} ({{ submission.year }})</h1>
+      <h1>{{ submission.name }} ({{ submission.year }})
+        <span style="float: right;">
+          <button
+            class="el-button el-button--primary el-button--small"
+            @click="onToggleViewType">Toggle View</button>
+        </span>
+      </h1>
       <p>Submission for <strong>{{ submission.slug }}</strong> by {{ submission.user }} on {{ submittedAt }}</p>
       <p v-if="submission.draft">This submission is a draft, it may not be complete yet.</p>
       <p>{{ submission.reason }}</p>
@@ -51,7 +57,8 @@ export default {
       originalInstaller: null,
       submissionLoading: false,
       revisionsLoading: false,
-      contentDiff: null
+      contentDiff: null,
+      viewType: 'inline'
     }
   },
   computed: {
@@ -64,33 +71,31 @@ export default {
     },
     runnerDiff() {
       if (this.originalInstaller) {
-        return this.outputDiff(this.originalInstaller.runner, this.submission.runner)
+        return this.outputDiff(this.originalInstaller.runner, this.submission.runner, this.viewType)
       }
       return this.submission.runner
     },
     versionDiff() {
       if (this.originalInstaller) {
-        return this.outputDiff(this.originalInstaller.version, this.submission.version)
+        return this.outputDiff(this.originalInstaller.version, this.submission.version, this.viewType)
       }
       return this.submission.version
     },
     descriptionDiff() {
       if (this.originalInstaller) {
-        return this.outputDiff(this.originalInstaller.description, this.submission.description)
+        return this.outputDiff(this.originalInstaller.description, this.submission.description, this.viewType)
       }
       return this.submission.notes
     },
     notesDiff() {
       if (this.originalInstaller) {
-        return this.outputDiff(this.originalInstaller.notes, this.submission.notes)
+        return this.outputDiff(this.originalInstaller.notes, this.submission.notes, this.viewType)
       }
       return this.submission.notes
     },
     scriptDiff() {
       if (this.originalInstaller) {
-        const original = this.originalInstaller.content.replace('\r\n', '\n')
-        const submission = this.submission.content.replace('\r\n', '\n')
-        return this.outputDiff(original, submission)
+        return this.outputDiff(this.originalInstaller.content, this.submission.content, this.viewType)
       }
       return this.submission.content
     }
@@ -99,19 +104,21 @@ export default {
     this.getSubmission()
   },
   methods: {
-    outputDiff(originalText, newText) {
+    outputDiff(originalText, newText, viewType) {
       if (!originalText) {
         originalText = ''
       }
       if (!newText) {
         newText = ''
       }
+      originalText = originalText.replace('\r\n', '\n')
+      newText = newText.replace('\r\n', '\n')
       const options = prettydiff.defaults
       options.mode = 'diff'
       options.language = 'text'
       options.diff_format = 'html'
       options.diff_space_ignore = false
-      options.diff_view = 'inline'
+      options.diff_view = viewType
       options.source = originalText
       options.diff = newText
       return prettydiff.mode(options)
@@ -158,6 +165,13 @@ export default {
         })
         this.$router.push({ path: '/installers/submissions' })
       })
+    },
+    onToggleViewType() {
+      if (this.viewType === 'inline') {
+        this.viewType = 'sidebyside'
+      } else {
+        this.viewType = 'inline'
+      }
     }
   }
 }
@@ -169,7 +183,7 @@ export default {
 }
 .diff {
   background-color: #E4F1FE;
-  display: block;
+  display: flex;
   font-family: 'Courier New', Courier, monospace;
   padding: 0 1em;
   ol {
@@ -197,10 +211,9 @@ export default {
     background-color: #C4FCDC;
   }
   .empty {
-    border: 1px solid red;
     line-height: 1em;
     height: 1em;
-    background-color: grey;
+    background-color: #FFCFF7;
   }
   em {
     outline: 1px dotted salmon;
@@ -212,9 +225,13 @@ export default {
     background-color: #FFEED5;
 
   }
+  .diff-left {
+    border-right: 2px solid #AAA;
+  }
   .diff-left, .diff-right {
-    border: 1px solid #000;
-    display: inline-block;
+    padding: 0 0.5em;
+    width: 50%;
+    overflow: scroll;
   }
 }
 </style>
