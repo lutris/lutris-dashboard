@@ -4,7 +4,7 @@
       <h1>{{ submission.name }} ({{ submission.year }})</h1>
       <p>Submission for <strong>{{ submission.slug }}</strong> by {{ submission.user }} on {{ submittedAt }}</p>
       <p v-if="submission.draft">This submission is a draft, it may not be complete yet.</p>
-      <p>{{submission.reason}}</p>
+      <p>{{ submission.reason }}</p>
       <div>
         <strong>Runner</strong>
         <div class="prettydiff" v-html="runnerDiff" />
@@ -88,7 +88,9 @@ export default {
     },
     scriptDiff() {
       if (this.originalInstaller) {
-        return this.outputDiff(this.originalInstaller.content, this.submission.content)
+        const original = this.originalInstaller.content.replace('\r\n', '\n')
+        const submission = this.submission.content.replace('\r\n', '\n')
+        return this.outputDiff(original, submission)
       }
       return this.submission.content
     }
