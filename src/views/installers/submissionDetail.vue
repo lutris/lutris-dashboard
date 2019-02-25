@@ -103,6 +103,9 @@ export default {
       if (!originalText) {
         originalText = ''
       }
+      if (!newText) {
+        newText = ''
+      }
       const options = prettydiff.defaults
       options.mode = 'diff'
       options.language = 'text'
