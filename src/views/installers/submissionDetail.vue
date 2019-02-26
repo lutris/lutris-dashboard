@@ -8,7 +8,23 @@
             @click="onToggleViewType">Toggle View</button>
         </span>
       </h1>
-      <p>Submission for <strong>{{ submission.slug }}</strong> by {{ submission.user }} on {{ submittedAt }}</p>
+
+      <div>
+        Submission for <strong>{{ submission.slug }}</strong> by {{ submission.user }} on {{ submittedAt }}
+        <div v-if="originalInstaller" style="float: right;">
+          <select
+            id="revision-select"
+            v-model="currentRevisionId"
+            name="revisionSelect"
+            @change="onRevisionSelect($event)">
+            <option
+              v-for="revision in originalInstaller.revisions"
+              :key="revision.revision_id"
+              :value="revision.revision_id">{{ revision.comment }}</option>
+          </select>
+        </div>
+      </div>
+
       <p v-if="submission.draft">This submission is a draft, it may not be complete yet.</p>
       <p>{{ submission.reason }}</p>
       <div>
@@ -55,6 +71,7 @@ export default {
       submission: null,
       installers: null,
       originalInstaller: null,
+      currentRevisionId: null,
       submissionLoading: false,
       revisionsLoading: false,
       contentDiff: null,
@@ -102,6 +119,7 @@ export default {
   },
   created() {
     this.getSubmission()
+    this.currentRevisionId = this.revisionId
   },
   methods: {
     outputDiff(originalText, newText, viewType) {
@@ -140,7 +158,6 @@ export default {
         for (const installer of this.installers) {
           if (this.submission.installer_id === installer.id) {
             this.originalInstaller = installer
-
             break
           }
         }
@@ -171,6 +188,13 @@ export default {
         this.viewType = 'sidebyside'
       } else {
         this.viewType = 'inline'
+      }
+    },
+    onRevisionSelect(event) {
+      for (const revision of this.originalInstaller.revisions) {
+        if (revision.revision_id === this.currentRevisionId) {
+          this.submission = revision
+        }
       }
     }
   }
@@ -221,9 +245,8 @@ export default {
     line-height: 0.8em;
     padding: 0;
   }
-.replace {
+  .replace {
     background-color: #FFEED5;
-
   }
   .diff-left {
     border-right: 2px solid #AAA;
