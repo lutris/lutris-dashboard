@@ -7,7 +7,7 @@ This is the moderator's dashboard for Lutris built with [vue-element-admin](http
 
 ```bash
 # clone the project
-git clone https://github.com/PanJiaChen/vue-element-admin.git
+git clone https://github.com/lutris/lutris-dashboard.git
 
 # install dependencies
 npm install
