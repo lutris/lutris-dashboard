@@ -1,11 +1,15 @@
 <template>
   <div>
     <div v-if="submission">
-      <h1>{{ submission.name }} ({{ submission.year }})
+      <h1>
+        {{ submission.name }} ({{ submission.year }})
         <span style="float: right;">
           <button
             class="el-button el-button--primary el-button--small"
-            @click="onToggleViewType">Toggle View</button>
+            @click="onToggleViewType"
+          >
+            Toggle View
+          </button>
         </span>
       </h1>
 
@@ -16,16 +20,22 @@
             id="revision-select"
             v-model="currentRevisionId"
             name="revisionSelect"
-            @change="onRevisionSelect($event)">
+            @change="onRevisionSelect($event)"
+          >
             <option
               v-for="revision in originalInstaller.revisions"
               :key="revision.revision_id"
-              :value="revision.revision_id">{{ revision.comment }}</option>
+              :value="revision.revision_id"
+            >
+              {{ revision.comment }}
+            </option>
           </select>
         </div>
       </div>
 
-      <p v-if="submission.draft">This submission is a draft, it may not be complete yet.</p>
+      <p v-if="submission.draft">
+        This submission is a draft, it may not be complete yet.
+      </p>
       <p>{{ submission.reason }}</p>
       <div>
         <strong>Runner</strong>
@@ -41,7 +51,7 @@
       </div>
       <div>
         <strong>Description</strong>
-        <div class="prettydiff" v-html="descriptionDiff"/>
+        <div class="prettydiff" v-html="descriptionDiff" />
       </div>
       <div class="script-diff">
         <strong>Script</strong>
@@ -49,11 +59,17 @@
         <button
           id="acceptSubmission"
           class="el-button el-button--primary el-button--small"
-          @click="onSubmissionAccept">Accept</button>
+          @click="onSubmissionAccept"
+        >
+          Accept
+        </button>
         <button
           id="rejectSubmission"
           class="el-button el-button--danger el-button--small"
-          @click="onRejectSubmission">Reject</button>
+          @click="onRejectSubmission"
+        >
+          Reject
+        </button>
       </div>
     </div>
   </div>
