@@ -46,12 +46,12 @@
         <div class="prettydiff" v-html="versionDiff" />
       </div>
       <div>
-        <strong>Notes</strong>
-        <div class="prettydiff" v-html="notesDiff" />
-      </div>
-      <div>
         <strong>Description</strong>
         <div class="prettydiff" v-html="descriptionDiff" />
+      </div>
+      <div>
+        <strong>Notes</strong>
+        <div class="prettydiff" v-html="notesDiff" />
       </div>
       <div class="script-diff">
         <strong>Script</strong>
