@@ -1,7 +1,7 @@
 <template>
   <div class="app-container">
     <h3>Game statistics</h3>
-    <p v-if="!isLoading">
+    <p v-if="stats">
       <strong>Pending submissions: </strong>
       <span>{{ stats.num_installer_submissions }}</span>
     </p>
@@ -16,11 +16,9 @@
 import { fetchStats } from '@/api/installers'
 export default {
   name: 'GamesDashboard',
-  components: {},
   data() {
     return {
-      stats: null,
-      isLoading: true
+      stats: null
     }
   },
   created() {
@@ -28,12 +26,9 @@ export default {
   },
   methods: {
     getStats() {
-      this.isLoading = true
       fetchStats().then(response => {
         console.log(response.data)
         this.stats = response.data
-
-        this.isLoading = false
       })
     }
   }
