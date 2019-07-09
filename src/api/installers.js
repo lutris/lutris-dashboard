@@ -46,3 +46,10 @@ export function deleteSubmission(id) {
     method: 'delete'
   })
 }
+
+export function fetchStats() {
+  return request({
+    url: '/api/games/stats',
+    method: 'get'
+  })
+}

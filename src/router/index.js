@@ -81,6 +81,18 @@ export default new Router({
 
 export const asyncRouterMap = [
   {
+    path: '/games',
+    component: Layout,
+    children: [
+      {
+        path: '',
+        component: () => import('@/views/games/index'),
+        name: 'GamesDashboard',
+        meta: { title: 'Games', noCache: true, icon: 'list' }
+      }
+    ]
+  },
+  {
     path: '/installers',
     redirect: '/installers/submissions',
     component: Layout,
