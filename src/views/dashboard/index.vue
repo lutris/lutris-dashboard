@@ -19,7 +19,6 @@ export default {
   },
   computed: {},
   created() {
-    console.log('Creating dashboard')
     this.currentRole = 'editorDashboard'
   }
 }

@@ -18,7 +18,7 @@ export default {
   name: 'GamesDashboard',
   data() {
     return {
-      stats: null
+      stats: () => null
     }
   },
   created() {
@@ -27,7 +27,6 @@ export default {
   methods: {
     getStats() {
       fetchStats().then(response => {
-        console.log(response.data)
         this.stats = response.data
       })
     }
