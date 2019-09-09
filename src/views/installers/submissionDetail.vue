@@ -2,7 +2,7 @@
   <div>
     <div v-if="submission">
       <h1>
-        {{ submission.name }} ({{ submission.year }})
+        <a :href="'https://lutris.net/games/' + submission.game_slug">{{ submission.name }} ({{ submission.year }})</a>
         <span style="float: right;">
           <button
             class="el-button el-button--primary el-button--small"
@@ -162,6 +162,7 @@ export default {
       this.submissionLoading = true
       fetchSubmission(this.revisionId).then(response => {
         this.submission = response.data
+        console.log(this.submission)
         this.submissionsLoading = false
         this.getRevisions(this.submission.game_slug)
       })
