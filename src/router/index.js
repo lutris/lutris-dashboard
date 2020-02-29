@@ -59,7 +59,7 @@ export const constantRouterMap = [
     hidden: true
   },
   {
-    path: '',
+    path: '/',
     component: Layout,
     redirect: 'dashboard',
     children: [
@@ -85,10 +85,16 @@ export const asyncRouterMap = [
     component: Layout,
     children: [
       {
-        path: '',
+        path: 'index',
         component: () => import('@/views/games/index'),
         name: 'GamesDashboard',
         meta: { title: 'Games', noCache: true, icon: 'list' }
+      },
+      {
+        path: 'merge',
+        component: () => import('@/views/games/merge'),
+        name: 'GameMerge',
+        meta: { title: 'Merge', noCache: true, icon: 'list' }
       }
     ]
   },

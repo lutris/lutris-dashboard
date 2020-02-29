@@ -39,7 +39,6 @@ export default {
       this.statsLoading = true
       fetchStats().then(response => {
         this.stats = response.data
-        console.log(this.stats)
         this.statsLoading = false
       })
     }
