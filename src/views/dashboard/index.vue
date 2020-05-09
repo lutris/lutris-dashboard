@@ -12,7 +12,7 @@
 </template>
 
 <script>
-import { fetchStats } from '@/api/installers'
+import { fetchStats } from '@/api/games'
 export default {
   name: 'Dashboard',
   components: {},
