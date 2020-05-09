@@ -83,18 +83,22 @@ export const asyncRouterMap = [
   {
     path: '/games',
     component: Layout,
+    meta: {
+      title: 'Games',
+      icon: 'list'
+    },
     children: [
       {
         path: 'index',
         component: () => import('@/views/games/index'),
         name: 'GamesDashboard',
-        meta: { title: 'Games', noCache: true, icon: 'list' }
+        meta: { title: 'Games', noCache: true }
       },
       {
         path: 'merge',
         component: () => import('@/views/games/merge'),
         name: 'GameMerge',
-        meta: { title: 'Merge', noCache: true, icon: 'list' }
+        meta: { title: 'Merge', noCache: true }
       }
     ]
   },
