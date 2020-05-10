@@ -147,15 +147,14 @@ export default {
       }
       originalText = originalText.replace('\r\n', '\n')
       newText = newText.replace('\r\n', '\n')
-      const options = prettydiff.defaults
-      options.mode = 'diff'
-      options.language = 'text'
-      options.diff_format = 'html'
-      options.diff_space_ignore = false
-      options.diff_view = viewType
-      options.source = originalText
-      options.diff = newText
-      return prettydiff.mode(options)
+      prettydiff.options.mode = 'diff'
+      prettydiff.options.language = 'text'
+      prettydiff.options.diff_format = 'html'
+      prettydiff.options.diff_space_ignore = false
+      prettydiff.options.diff_view = viewType
+      prettydiff.options.source = originalText
+      prettydiff.options.diff = newText
+      return prettydiff()
     },
 
     getSubmission() {
