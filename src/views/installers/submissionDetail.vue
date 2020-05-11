@@ -15,21 +15,40 @@
 
       <div>
         Submission for <strong>{{ submission.slug }}</strong> by {{ submission.user }} on {{ submittedAt }}
-        <div v-if="originalInstaller" style="float: right;">
+        <div v-if="originalInstaller">
           <select
             id="revision-select"
             v-model="currentRevisionId"
             name="revisionSelect"
+            style="width: 400px;"
             @change="onRevisionSelect($event)"
           >
             <option
-              v-for="revision in getSubmitterRevisions(originalInstaller.revisions)"
+              v-for="revision in getSubmitterRevisions()"
               :key="revision.revision_id"
               :value="revision.revision_id"
             >
               {{ revision.comment }}
             </option>
           </select>
+          <div v-if="getOtherRevisions()" style="float: right; ">
+            <span>Revisions from other users:</span>
+            <select
+              id="revision-select"
+              v-model="currentRevisionId"
+              name="revisionSelect"
+              style="width: 400px"
+              @change="onRevisionSelect($event)"
+            >
+              <option
+                v-for="revision in getOtherRevisions()"
+                :key="revision.revision_id"
+                :value="revision.revision_id"
+              >
+                {{ revision.comment }}
+              </option>
+            </select>
+          </div>
         </div>
       </div>
 
@@ -178,14 +197,13 @@ export default {
         }
       })
     },
-    /**
-     * Filter revisions by the author of this submission
-     */
-    getSubmitterRevisions(revisions) {
-      const self = this
-      return revisions.filter(function(revision) {
-        return revision.user === self.submission.user
-      })
+    // Filter revisions by the author of this submission
+    getSubmitterRevisions() {
+      return this.originalInstaller.revisions.filter(revision => revision.user === this.submission.user)
+    },
+    // Return revisions from different authors
+    getOtherRevisions() {
+      return this.originalInstaller.revisions.filter(revision => revision.user !== this.submission.user)
     },
     onSubmissionAccept() {
       acceptSubmission(this.revisionId).then(response => {
