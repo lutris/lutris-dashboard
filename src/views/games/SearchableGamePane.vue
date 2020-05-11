@@ -11,6 +11,7 @@
       <h1>{{ game.name }} <el-tag type="success">{{ game.slug }} ({{ game.id }})</el-tag></h1>
       <p>Year: {{ game.year }}</p>
       <p>Platforms: <el-tag v-for="platform in game.platforms" :key="platform.slug" type="info">{{ platform.name }}</el-tag></p>
+      <p>Aliases: <el-tag v-for="alias in game.aliases" :key="alias.slug" type="info">{{ alias.name }}</el-tag></p>
       <p>{{ game.description }}</p>
     </div>
   </div>
