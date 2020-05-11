@@ -23,7 +23,7 @@
             @change="onRevisionSelect($event)"
           >
             <option
-              v-for="revision in originalInstaller.revisions"
+              v-for="revision in getSubmitterRevisions(originalInstaller.revisions)"
               :key="revision.revision_id"
               :value="revision.revision_id"
             >
@@ -161,7 +161,6 @@ export default {
       this.submissionLoading = true
       fetchSubmission(this.revisionId).then(response => {
         this.submission = response.data
-        console.log(this.submission)
         this.submissionsLoading = false
         this.getRevisions(this.submission.game_slug)
       })
@@ -177,6 +176,15 @@ export default {
             break
           }
         }
+      })
+    },
+    /**
+     * Filter revisions by the author of this submission
+     */
+    getSubmitterRevisions(revisions) {
+      const self = this
+      return revisions.filter(function(revision) {
+        return revision.user === self.submission.user
       })
     },
     onSubmissionAccept() {
