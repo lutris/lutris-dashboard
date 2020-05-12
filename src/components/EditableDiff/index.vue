@@ -64,8 +64,8 @@ export default {
       if (!newText) {
         newText = ''
       }
-      originalText = originalText.replace('\r\n', '\n')
-      newText = newText.replace('\r\n', '\n')
+      originalText = originalText.replace(/\r\n/g, '\n')
+      newText = newText.replace(/\r\n/g, '\n')
       prettydiff.options.mode = 'diff'
       prettydiff.options.language = 'text'
       prettydiff.options.diff_format = 'html'
