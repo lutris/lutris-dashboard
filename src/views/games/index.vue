@@ -1,14 +1,18 @@
 <template>
-  <div class="app-container" />
+  <div class="app-container">
+    <h1>Games</h1>
+    <searchable-game-pane />
+  </div>
 </template>
 
 <script>
+import SearchableGamePane from '@/components/SearchableGamePane'
+
 export default {
   name: 'GamesDashboard',
+  components: { SearchableGamePane },
   data() {
-    return {}
-  },
-  created() {},
-  methods: {}
+    return { game: null }
+  }
 }
 </script>

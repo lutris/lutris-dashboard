@@ -13,7 +13,7 @@
 </template>
 
 <script>
-import SearchableGamePane from './SearchableGamePane'
+import SearchableGamePane from '@/components/SearchableGamePane'
 
 export default {
   name: 'GameMerge',
