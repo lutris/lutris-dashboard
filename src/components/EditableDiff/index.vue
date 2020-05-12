@@ -6,7 +6,7 @@
     <div v-if="editMode && value" class="diff">
       <textarea v-model="value[field]" />
     </div>
-    <pre v-else class="prettydiff" v-html="diff" />
+    <pre v-else :class="{ chardiff: charDiff }" class="prettydiff" v-html="diff" />
   </div>
 </template>
 
@@ -35,6 +35,10 @@ export default {
     viewType: {
       type: String,
       default: 'inline'
+    },
+    charDiff: {
+      type: Boolean,
+      default: true
     }
   },
   data() {
@@ -89,6 +93,14 @@ export default {
 .prettydiff > p {
   display: none;
 }
+.chardiff {
+  em {
+    outline: 1px dotted salmon;
+    background-color: #FFC46C;
+    line-height: 0.8em;
+    padding: 0;
+  }
+}
 .diff {
   background-color: #E4F1FE;
   display: flex;
@@ -129,12 +141,7 @@ export default {
     height: 1em;
     background-color: #FFCFF7;
   }
-  em {
-    outline: 1px dotted salmon;
-    background-color: #FFC46C;
-    line-height: 0.8em;
-    padding: 0;
-  }
+
   .replace {
     background-color: #FFEED5;
   }

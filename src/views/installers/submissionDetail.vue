@@ -4,12 +4,19 @@
       <h1>
         <a :href="'https://lutris.net/games/' + submission.game_slug">{{ submission.name }} ({{ submission.year }})</a>
         <span style="float: right;">
-          <button
-            class="el-button el-button--primary el-button--small"
+          <el-button
+            class="el-button--primary el-button--small"
             @click="onToggleViewType"
           >
             Toggle View
-          </button>
+          </el-button>
+          <el-button
+            class="el-button--secondary el-button--small"
+            @click="onToggleCharDiff"
+          >
+            Toggle char diff
+          </el-button>
+
         </span>
       </h1>
 
@@ -60,30 +67,35 @@
         :value="submission"
         :original="originalInstaller"
         :view-type="viewType"
+        :char-diff="showCharDiff"
         field="runner"
         label="Runner" />
       <editable-diff
         :value="submission"
         :original="originalInstaller"
         :view-type="viewType"
+        :char-diff="showCharDiff"
         field="version"
         label="Version" />
       <editable-diff
         :value="submission"
         :original="originalInstaller"
         :view-type="viewType"
+        :char-diff="showCharDiff"
         field="description"
         label="Description" />
       <editable-diff
         :value="submission"
         :original="originalInstaller"
         :view-type="viewType"
+        :char-diff="showCharDiff"
         field="notes"
         label="Notes" />
       <editable-diff
         :value="submission"
         :original="originalInstaller"
         :view-type="viewType"
+        :char-diff="showCharDiff"
         field="content"
         label="Script" />
       <div>
@@ -125,6 +137,7 @@ export default {
       currentRevisionId: null,
       submissionLoading: false,
       revisionsLoading: false,
+      showCharDiff: true,
       viewType: 'inline'
     }
   },
@@ -197,6 +210,9 @@ export default {
       } else {
         this.viewType = 'inline'
       }
+    },
+    onToggleCharDiff() {
+      this.showCharDiff = !this.showCharDiff
     },
     onRevisionSelect(event) {
       for (const revision of this.originalInstaller.revisions) {
