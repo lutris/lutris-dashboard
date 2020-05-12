@@ -30,13 +30,13 @@ export function fetchRevisions(slug) {
   })
 }
 
-export function acceptSubmission(id) {
+export function acceptSubmission(submission) {
+  const id = submission.revision_id
+  submission.action = 'accept'
   return request({
     url: `/api/installers/revisions/${id}`,
     method: 'put',
-    data: {
-      action: 'accept'
-    }
+    data: submission
   })
 }
 

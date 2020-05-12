@@ -172,7 +172,7 @@ export default {
       return this.originalInstaller.revisions.filter(revision => revision.user !== this.submission.user)
     },
     onSubmissionAccept() {
-      acceptSubmission(this.revisionId).then(response => {
+      acceptSubmission(this.submission).then(response => {
         Message({
           message: 'Submission has been accepted',
           type: 'info',
