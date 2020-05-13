@@ -46,3 +46,10 @@ export function deleteSubmission(id) {
     method: 'delete'
   })
 }
+
+export function deleteInstaller(id) {
+  return request({
+    url: `/api/installers/id/${id}`,
+    method: 'delete'
+  })
+}

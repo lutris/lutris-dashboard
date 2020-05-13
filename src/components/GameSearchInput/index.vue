@@ -4,7 +4,7 @@
       :fetch-suggestions="getGameSuggestions"
       v-model="game_name"
       class="inline-input"
-      placeholder="Please Input"
+      placeholder="Search for a game…"
       @select="handleSelect"
     />
   </div>
