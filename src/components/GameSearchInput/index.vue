@@ -19,7 +19,7 @@ export default {
   components: { GameCard },
   props: {
     onSelect: {
-      type: Object,
+      type: Function,
       default: null
     }
   },

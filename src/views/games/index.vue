@@ -1,7 +1,7 @@
 <template>
   <div class="app-container">
     <h1>Games</h1>
-    <games-search-input :on-select="redirectToDetails" />
+    <game-search-input :on-select="redirectToDetails" />
   </div>
 </template>
 

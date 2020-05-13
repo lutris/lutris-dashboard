@@ -16,46 +16,48 @@
           >
             Toggle char diff
           </el-button>
-
         </span>
       </h1>
 
       <div>
         Submission for <strong>{{ submission.slug }}</strong> by {{ submission.user }} on {{ submittedAt }}
+        <div>
+          <game-search-input :on-select="onGameSelected" />
+          <el-select
+            v-if="comparedGame"
+            v-model="installerId"
+            @change="onInstallerSelect($event)"
+          >
+            <el-option
+              v-for="installer in comparedGame.installers"
+              :key="installer.version"
+              :value="installer.version"
+            >
+              {{ installer.version }}
+            </el-option>
+          </el-select>
+        </div>
         <div v-if="originalInstaller">
-          <select
+          <el-select
             id="revision-select"
             v-model="currentRevisionId"
+            placeholder="Choose a revision"
             name="revisionSelect"
             style="width: 400px;"
             @change="onRevisionSelect($event)"
           >
-            <option
+            <el-option
               v-for="revision in getSubmitterRevisions()"
               :key="revision.revision_id"
               :value="revision.revision_id"
             >
               {{ revision.comment }}
-            </option>
-          </select>
-          <div v-if="getOtherRevisions()" >
-            <span>Revisions from other users:</span>
-            <select
-              id="revision-select"
-              v-model="currentRevisionId"
-              name="revisionSelect"
-              style="width: 400px"
-              @change="onRevisionSelect($event)"
-            >
-              <option
-                v-for="revision in getOtherRevisions()"
-                :key="revision.revision_id"
-                :value="revision.revision_id"
-              >
-                {{ revision.comment }}
-              </option>
-            </select>
-          </div>
+            </el-option>
+          </el-select>
+          <el-tag v-if="getOtherRevisions().length" type="warning">
+            {{ getOtherRevisions().length }} revisions from other users
+          </el-tag>
+
         </div>
       </div>
 
@@ -122,6 +124,7 @@
 import { fetchSubmission, fetchRevisions, acceptSubmission, deleteSubmission } from '@/api/installers'
 import { Message } from 'element-ui'
 import moment from 'moment'
+import { getGame } from '@/api/games'
 import EditableDiff from '@/components/EditableDiff'
 import GameSearchInput from '@/components/GameSearchInput'
 
@@ -134,6 +137,8 @@ export default {
     return {
       submission: null,
       installers: null,
+      installerId: null,
+      comparedGame: null,
       originalInstaller: null,
       currentRevisionId: null,
       submissionLoading: false,
@@ -185,6 +190,11 @@ export default {
     getOtherRevisions() {
       return this.originalInstaller.revisions.filter(revision => revision.user !== this.submission.user)
     },
+    onGameSelected(slug) {
+      getGame(slug).then(response => {
+        this.comparedGame = response.data
+      })
+    },
     onSubmissionAccept() {
       acceptSubmission(this.submission).then(response => {
         Message({
@@ -215,7 +225,14 @@ export default {
     onToggleCharDiff() {
       this.showCharDiff = !this.showCharDiff
     },
-    onRevisionSelect(event) {
+    onInstallerSelect(version) {
+      for (const installer of this.comparedGame.installers) {
+        if (installer.version === version) {
+          this.originalInstaller = installer
+        }
+      }
+    },
+    onRevisionSelect() {
       for (const revision of this.originalInstaller.revisions) {
         if (revision.revision_id === this.currentRevisionId) {
           this.submission = revision
