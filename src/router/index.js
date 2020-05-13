@@ -99,6 +99,12 @@ export const asyncRouterMap = [
         component: () => import('@/views/games/merge'),
         name: 'GameMerge',
         meta: { title: 'Merge', noCache: true }
+      },
+      {
+        path: ':slug',
+        component: () => import('@/views/games/detail'),
+        name: 'GameDetail',
+        hidden: true
       }
     ]
   },

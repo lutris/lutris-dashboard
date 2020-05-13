@@ -8,45 +8,18 @@
       @select="handleSelect"
     />
     <div v-if="game">
-      <el-card>
-
-        <div slot="header">
-          <img :src="gameMedia(game.banner_url)" :alt="game.banner_url">
-          <strong>{{ game.name }}</strong>
-          <el-tag type="success">{{ game.slug }} ({{ game.id }})</el-tag>
-        </div>
-
-        <div>
-          <p>Year: {{ game.year }}</p>
-          <p>Platforms: <el-tag v-for="platform in game.platforms" :key="platform.slug" type="info">{{ platform.name }}</el-tag></p>
-          <p v-if="game.aliases">
-            Aliases: <el-tag v-for="alias in game.aliases" :key="alias.slug" type="info">{{ alias.name }}</el-tag>
-          </p>
-        </div>
-
-        <el-collapse>
-          <el-collapse-item title="Description">
-            <p>{{ game.description }}</p>
-          </el-collapse-item>
-          <el-collapse-item v-for="installer in game.installers" :key="installer.slug" :title="installer.slug">
-            <pre v-html="installer.content"/>
-            <ul v-if="installer.revisions">
-              <li v-for="revision in installer.revisions" :key="revision.revision_id">
-                <a :href="submissionUrl(revision.revision_id)">Revision by {{ revision.user }}</a>
-              </li>
-            </ul>
-          </el-collapse-item>
-        </el-collapse>
-      </el-card>
+      <game-card :game="game" />
     </div>
   </div>
 </template>
 
 <script>
-import { searchGames, getGame } from '@/api/games'
+import { searchGames } from '@/api/games'
+import GameCard from '@/components/GameCard'
 
 export default {
   name: 'SearchableGamePane',
+  components: { GameCard },
   data() {
     return {
       timeout: null,
@@ -74,10 +47,7 @@ export default {
       })
     },
     handleSelect(item) {
-      getGame(item.slug).then(response => {
-        this.game = response.data
-        this.game_name = this.game.name
-      })
+      this.$router.push({ path: '/games/' + item.slug })
     }
   }
 }

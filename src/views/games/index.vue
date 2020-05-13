@@ -11,8 +11,11 @@ import SearchableGamePane from '@/components/SearchableGamePane'
 export default {
   name: 'GamesDashboard',
   components: { SearchableGamePane },
-  data() {
-    return { game: null }
+  props: {
+    game: {
+      type: Object,
+      default: null
+    }
   }
 }
 </script>
