@@ -38,7 +38,7 @@
               {{ revision.comment }}
             </option>
           </select>
-          <div v-if="getOtherRevisions()" style="float: right; ">
+          <div v-if="getOtherRevisions()" >
             <span>Revisions from other users:</span>
             <select
               id="revision-select"
@@ -123,11 +123,12 @@ import { fetchSubmission, fetchRevisions, acceptSubmission, deleteSubmission } f
 import { Message } from 'element-ui'
 import moment from 'moment'
 import EditableDiff from '@/components/EditableDiff'
+import GameSearchInput from '@/components/GameSearchInput'
 
 export default {
   name: 'SubmissionDetail',
   components: {
-    EditableDiff
+    EditableDiff, GameSearchInput
   },
   data() {
     return {

@@ -3,13 +3,13 @@
     <el-row>
       <h1>Game merge</h1>
       <el-col :span="12">
-        <searchable-game-pane />
+        <game-searh-input />
         <div v-if="game_1">
           <game-card :game="game_1" />
         </div>
       </el-col>
       <el-col :span="12">
-        <searchable-game-pane />
+        <game-search-input />
         <div v-if="game_2">
           <game-card :game="game_2" />
         </div>
@@ -19,11 +19,11 @@
 </template>
 
 <script>
-import SearchableGamePane from '@/components/SearchableGamePane'
+import GameSearchInput from '@/components/GameSearchInput'
 
 export default {
   name: 'GameMerge',
-  components: { SearchableGamePane },
+  components: { GameSearchInput },
   data() {
     return {
       game_1: null,

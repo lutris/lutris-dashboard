@@ -1,16 +1,16 @@
 <template>
   <div class="app-container">
     <h1>Games</h1>
-    <searchable-game-pane :on-select="redirectToDetails" />
+    <games-search-input :on-select="redirectToDetails" />
   </div>
 </template>
 
 <script>
-import SearchableGamePane from '@/components/SearchableGamePane'
+import GameSearchInput from '@/components/GameSearchInput'
 
 export default {
   name: 'GamesDashboard',
-  components: { SearchableGamePane },
+  components: { GameSearchInput },
   props: {
     game: {
       type: Object,

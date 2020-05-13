@@ -7,9 +7,6 @@
       placeholder="Please Input"
       @select="handleSelect"
     />
-    <div v-if="game">
-      <game-card :game="game" />
-    </div>
   </div>
 </template>
 
@@ -18,7 +15,7 @@ import { searchGames } from '@/api/games'
 import GameCard from '@/components/GameCard'
 
 export default {
-  name: 'SearchableGamePane',
+  name: 'GameSearchInput',
   components: { GameCard },
   props: {
     onSelect: {
