@@ -20,6 +20,12 @@ import GameCard from '@/components/GameCard'
 export default {
   name: 'SearchableGamePane',
   components: { GameCard },
+  props: {
+    onSelect: {
+      type: Object,
+      default: null
+    }
+  },
   data() {
     return {
       timeout: null,
@@ -47,7 +53,7 @@ export default {
       })
     },
     handleSelect(item) {
-      this.$router.push({ path: '/games/' + item.slug })
+      this.onSelect(item.slug)
     }
   }
 }
