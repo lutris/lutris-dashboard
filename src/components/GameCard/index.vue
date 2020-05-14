@@ -54,9 +54,23 @@
               icon="el-icon-delete"
               circle />
           </el-popconfirm>
+          <el-button
+            type="info"
+            icon="el-icon-edit"
+            circle
+            @click="onShowInstaller(scope.row['id'])" />
         </template>
       </el-table-column>
     </el-table>
+    <el-dialog
+      :visible.sync="installerVisible"
+      title="Installer"
+      width="50%">
+      <pre v-html="installerContent" />
+      <span slot="footer" class="dialog-footer">
+        <el-button @click="installerVisible = false">Close</el-button>
+      </span>
+    </el-dialog>
   </el-card>
 </template>
 
@@ -70,6 +84,12 @@ export default {
     game: {
       type: Object,
       default: null
+    }
+  },
+  data() {
+    return {
+      installerVisible: false,
+      installerContent: ''
     }
   },
   methods: {
@@ -91,6 +111,15 @@ export default {
       for (let i = 0; i < this.game.installers.length; i++) {
         if (this.game.installers[i].id === installerId) {
           Vue.delete(this.game.installers, i)
+        }
+      }
+    },
+    onShowInstaller(installerId) {
+      for (let i = 0; i < this.game.installers.length; i++) {
+        if (this.game.installers[i].id === installerId) {
+          const installer = this.game.installers[i]
+          this.installerContent = installer.content
+          this.installerVisible = true
         }
       }
     }
