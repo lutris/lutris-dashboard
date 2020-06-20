@@ -26,3 +26,10 @@ export function getGame(slug) {
     method: 'get'
   })
 }
+
+export function mergeGames(slug1, slug2) {
+  return request({
+    url: `/api/games/${slug1}/merge/${slug2}`,
+    method: 'post'
+  })
+}
