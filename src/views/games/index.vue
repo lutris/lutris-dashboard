@@ -19,7 +19,8 @@ export default {
   },
   methods: {
     redirectToDetails(slug) {
-      this.$router.push({ path: '/games/' + slug })
+      console.log(slug)
+      // this.$router.push({ path: '/games/' + slug })
     }
   }
 }

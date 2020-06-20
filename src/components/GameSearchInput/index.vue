@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-if="handleSelect">
     <el-autocomplete
       :fetch-suggestions="getGameSuggestions"
       v-model="game_name"
