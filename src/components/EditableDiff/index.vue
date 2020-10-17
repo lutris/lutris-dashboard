@@ -105,6 +105,7 @@ export default {
   background-color: #E4F1FE;
   display: flex;
   font-family: 'Courier New', Courier, monospace;
+  overflow: auto;
   padding: 0 1em;
   textarea {
     width: 100%;
