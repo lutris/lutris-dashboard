@@ -2,7 +2,7 @@
   <el-card>
 
     <div slot="header">
-      <img :src="gameMedia(game.banner_url)" :alt="game.banner_url" style="float: left; margin-right: 10px;">
+      <img :src="game.banner_url" :alt="game.banner_url" style="float: left; margin-right: 10px;">
       <a :href="gameURL(game.slug)" target="_blank">{{ game.name }}</a><br>
       <el-tag type="success">{{ game.slug }} ({{ game.id }})</el-tag><br>
       <span>Year: {{ game.year }}</span>
@@ -93,9 +93,6 @@ export default {
     }
   },
   methods: {
-    gameMedia(relUrl) {
-      return 'https://lutris.net' + relUrl
-    },
     gameURL(slug) {
       return 'https://lutris.net/games/' + slug
     },
