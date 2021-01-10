@@ -2,8 +2,11 @@
   <el-card>
 
     <div slot="header">
-      <img :src="game.banner_url" :alt="game.banner_url" style="float: left; margin-right: 10px;">
-      <a :href="gameURL(game.slug)" target="_blank">{{ game.name }}</a><br>
+      <a :href="gameURL(game.slug)" target="_blank">
+        <img :src="game.banner_url" :alt="game.banner_url" style="float: left; margin-right: 10px;">
+        {{ game.name }}
+      </a>
+      <br>
       <el-tag type="success">{{ game.slug }} ({{ game.id }})</el-tag><br>
       <span>Year: {{ game.year }}</span>
     </div>

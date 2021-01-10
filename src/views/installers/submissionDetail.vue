@@ -20,7 +20,10 @@
       </h1>
 
       <div>
-        Submission for <strong>{{ submission.slug }}</strong> by {{ submission.user }} on {{ submittedAt }}
+
+        Submission for <strong>{{ submission.slug }}</strong> by {{ submission.user }}<br>
+        Original installer updated at {{ updatedAt }}<br>
+        Sent on {{ submittedAt }}
         <div>
           <game-search-input :on-select="onGameSelected" />
           <el-select
@@ -154,6 +157,13 @@ export default {
     submittedAt() {
       const created_moment = moment(this.submission.created_at)
       return created_moment.format('MMMM Do hh:mm') + ' (' + created_moment.fromNow() + ')'
+    },
+    updatedAt() {
+      if (!this.originalInstaller) {
+        return ''
+      }
+      const updatedMoment = moment(this.originalInstaller.updated_at)
+      return updatedMoment.format('MMMM Do hh:mm') + ' (' + updatedMoment.fromNow() + ')'
     }
   },
   created() {
