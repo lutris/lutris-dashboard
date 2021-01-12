@@ -125,6 +125,19 @@ export const asyncRouterMap = [
         meta: { title: 'submissions', noCache: true }
       },
       {
+        path: 'new',
+        component: () => import('@/views/installers/newInstallers'),
+        name: 'newInstallers',
+        meta: { title: 'New Installers', noCache: true }
+      },
+      {
+        path: 'new/:id(\\d+)',
+        component: () => import('@/views/installers/newInstallerDetail'),
+        name: 'newInstallerDetail',
+        meta: { title: 'New Installer', noCache: true },
+        hidde: true
+      },
+      {
         path: 'submissions/drafts',
         component: () => import('@/views/installers/drafts'),
         name: 'Drafts',

@@ -16,7 +16,40 @@ export function fetchDrafts() {
   })
 }
 
+export function fetchNewInstallers() {
+  return request({
+    url: '/api/installers',
+    method: 'get',
+    params: { status: 'unpublished' }
+  })
+}
+
+export function acceptInstaller(installer) {
+  if (!installer) {
+    throw new Error('Missing installer')
+  }
+  installer.published = true
+  return request({
+    url: '/api/installers/id/' + installer.id,
+    method: 'patch',
+    data: installer
+  })
+}
+
+export function fetchInstaller(installerId) {
+  if (!installerId) {
+    throw new Error('Missing installer ID')
+  }
+  return request({
+    url: '/api/installers/id/' + installerId,
+    method: 'get'
+  })
+}
+
 export function fetchSubmission(id) {
+  if (!id) {
+    throw new Error('Missing submission ID')
+  }
   return request({
     url: `/api/installers/revisions/${id}`,
     method: 'get'
@@ -48,6 +81,9 @@ export function deleteSubmission(id) {
 }
 
 export function deleteInstaller(id) {
+  if (!id) {
+    throw new Error('Missing installer ID')
+  }
   return request({
     url: `/api/installers/id/${id}`,
     method: 'delete'
