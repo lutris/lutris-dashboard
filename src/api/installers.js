@@ -20,7 +20,7 @@ export function fetchNewInstallers() {
   return request({
     url: '/api/installers',
     method: 'get',
-    params: { status: 'unpublished' }
+    params: { status: 'new' }
   })
 }
 
