@@ -95,6 +95,12 @@ export const asyncRouterMap = [
         meta: { title: 'Games', noCache: true }
       },
       {
+        path: 'game_submissions',
+        component: () => import('@/views/games/submissions'),
+        name: 'GamesSubmission',
+        meta: { title: 'Submissions', noCache: true }
+      },
+      {
         path: 'merge',
         component: () => import('@/views/games/merge'),
         name: 'GameMerge',
@@ -122,7 +128,7 @@ export const asyncRouterMap = [
         path: 'submissions',
         component: () => import('@/views/installers/submissions'),
         name: 'Submissions',
-        meta: { title: 'submissions', noCache: true }
+        meta: { title: 'Submissions', noCache: true }
       },
       {
         path: 'new',
@@ -141,13 +147,13 @@ export const asyncRouterMap = [
         path: 'submissions/drafts',
         component: () => import('@/views/installers/drafts'),
         name: 'Drafts',
-        meta: { title: 'drafts', noCache: true }
+        meta: { title: 'Drafts', noCache: true }
       },
       {
         path: 'submissions/:id(\\d+)',
         component: () => import('@/views/installers/submission'),
         name: 'Submission',
-        meta: { title: 'submission', noCache: true },
+        meta: { title: 'Submission', noCache: true },
         hidden: true
       }
     ]

@@ -2,6 +2,7 @@
   <div class="dashboard-container">
     <div class="info-container">
       <p>Games: {{ stats.games }}</p>
+      <p>Submissions: <a href="/#/games/game_submissions">{{ stats.game_submissions }}</a></p>
       <p>Unpublished games: {{ stats.unpublished_games }}</p>
       <p>Installers : {{ stats.installers }}</p>
       <p>Unpublished installers: {{ stats.unpublished_installers }}</p>
@@ -21,6 +22,7 @@ export default {
       statsLoading: false,
       stats: {
         'games': 0,
+        'game_submissions': 0,
         'unpublished_games': 0,
         'published_games': 0,
         'installers': 0,
@@ -39,6 +41,7 @@ export default {
       this.statsLoading = true
       fetchStats().then(response => {
         this.stats = response.data
+        console.log(response.data)
         this.statsLoading = false
       })
     }

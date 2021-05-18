@@ -27,6 +27,20 @@ export function getGame(slug) {
   })
 }
 
+export function fetchGameSubmissions() {
+  return request({
+    url: `/api/games/submissions`,
+    method: 'get'
+  })
+}
+
+export function sendSubmissionAccept(submissionID) {
+  return request({
+    url: `/api/games/submissions/${submissionID}`,
+    method: 'post'
+  })
+}
+
 export function mergeGames(slug1, slug2) {
   return request({
     url: `/api/games/${slug1}/merge/${slug2}`,
