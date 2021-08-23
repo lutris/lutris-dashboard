@@ -119,8 +119,7 @@ export default {
   textarea {
     width: 100%;
     padding: .5em;
-    border: 1px dotted #666;
-    background: #FFf4FC;
+    font-family: Courier New,Courier,monospace;
   }
   ol {
     padding: 0;
