@@ -12,6 +12,7 @@
       </template>
     </el-table-column>
     <el-table-column label="Author" prop="user" />
+    <el-table-column label="Updated at" prop="updated_at" />
     <el-table-column label="Version" prop="version">
       <template slot-scope="scope">
         <a :href="'#/installers/new/' + scope.row['id']">{{ scope.row["version"] }}</a>
