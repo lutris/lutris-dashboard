@@ -64,10 +64,10 @@
         </div>
       </div>
 
-      <p v-if="submission.draft">
+      <p v-if="submission.draft" class="warning-message">
         This submission is a draft, it may not be complete yet.
       </p>
-      <p>{{ submission.reason }}</p>
+      <p class="warning-message">{{ submission.reason }}</p>
       <editable-diff
         :value="submission"
         :original="originalInstaller"

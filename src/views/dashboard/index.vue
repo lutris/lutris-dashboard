@@ -6,6 +6,7 @@
       <p>Unpublished games: {{ stats.unpublished_games }}</p>
       <p>Installers : {{ stats.installers }}</p>
       <p>Unpublished installers: {{ stats.unpublished_installers }}</p>
+      <p>Draft installers: {{ stats.drafts }}</p>
       <p>Screenshots : {{ stats.screenshots }}</p>
       <p>Unpublished screenshots: {{ stats.unpublished_screenshots }}</p>
     </div>
@@ -27,6 +28,7 @@ export default {
         'published_games': 0,
         'installers': 0,
         'unpublished_installers': 0,
+        'drafts': 0,
         'screenshots': 0,
         'unpublished_screenshots': 0
       }
@@ -41,7 +43,6 @@ export default {
       this.statsLoading = true
       fetchStats().then(response => {
         this.stats = response.data
-        console.log(response.data)
         this.statsLoading = false
       })
     }

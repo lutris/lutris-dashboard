@@ -199,3 +199,9 @@ code {
 .multiselect--active {
   z-index: 1000 !important;
 }
+
+.warning-message {
+  border: 1px solid #940d45;
+  background-color: #ff8fbe;
+  padding: 1em;
+}
