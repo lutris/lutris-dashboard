@@ -1,10 +1,14 @@
 import request from '@/utils/request'
 
-export function fetchSubmissions(url) {
+export function fetchSubmissions(url, order) {
   let params = {}
+  if (!order) {
+    order = 'newest'
+  }
+  params.order = order
   if (!url) {
     url = '/api/installers/revisions'
-    params = { type: 'submission' }
+    params = { type: 'submission', order: order }
   }
 
   return request({
