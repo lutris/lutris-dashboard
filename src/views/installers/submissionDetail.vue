@@ -20,7 +20,6 @@
       </h1>
 
       <div>
-
         Submission for <strong>{{ submission.slug }}</strong> by {{ submission.user }}<br>
         Original installer updated at {{ updatedAt }}<br>
         Sent on {{ submittedAt }}
@@ -67,7 +66,7 @@
       <p v-if="submission.draft" class="warning-message">
         This submission is a draft, it may not be complete yet.
       </p>
-      <p class="warning-message">{{ submission.reason }}</p>
+      <p v-if="submission.reason" class="warning-message">{{ submission.reason }}</p>
       <editable-diff
         :value="submission"
         :original="originalInstaller"
