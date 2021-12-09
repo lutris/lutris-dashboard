@@ -1,10 +1,16 @@
 import request from '@/utils/request'
 
-export function fetchSubmissions() {
+export function fetchSubmissions(url) {
+  let params = {}
+  if (!url) {
+    url = '/api/installers/revisions'
+    params = { type: 'submission' }
+  }
+
   return request({
-    url: '/api/installers/revisions',
+    url: url,
     method: 'get',
-    params: { type: 'submission' }
+    params: params
   })
 }
 
