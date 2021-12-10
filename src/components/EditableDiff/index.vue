@@ -6,6 +6,7 @@
     <div v-if="editMode && value" class="diff">
       <textarea
         id="editBox"
+        ref="editBox"
         v-model="value[field]"
       />
     </div>
@@ -81,7 +82,7 @@ export default {
     toggleEditMode() {
       this.editMode = !this.editMode
       this.$nextTick().then(() => {
-        const editBox = document.getElementById('editBox')
+        const editBox = this.$refs.editBox
         if (editBox) {
           editBox.setAttribute('style', `height: ${editBox.scrollHeight}px`)
         }
