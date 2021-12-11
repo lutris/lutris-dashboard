@@ -1,16 +1,25 @@
 import request from '@/utils/request'
 
-export function fetchSubmissions(url, order) {
-  let params = {}
-  if (!order) {
-    order = 'newest'
+function paramsToObject(entries) {
+  const result = {}
+  for (const [key, value] of entries) {
+    result[key] = value
   }
-  params.order = order
-  if (!url) {
-    url = '/api/installers/revisions'
-    params = { type: 'submission', order: order }
-  }
+  return result
+}
 
+export function fetchSubmissions(url, order = 'newest') {
+  let paramObj = new URLSearchParams()
+  if (url) {
+    const apiURL = new URL(url)
+    url = apiURL.pathname
+    paramObj = new URLSearchParams(apiURL.search)
+  } else {
+    url = '/api/installers/revisions'
+  }
+  paramObj.set('order', order)
+  paramObj.set('type', 'submission')
+  const params = paramsToObject(paramObj.entries())
   return request({
     url: url,
     method: 'get',

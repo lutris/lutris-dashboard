@@ -25,13 +25,14 @@ export default {
       submissions: null,
       submissionsLoading: false,
       totalSubmissions: 0,
+      currentURL: localStorage.getItem('installerCurrentURL'),
       nextURL: null,
       previousURL: null,
-      order: 'newest'
+      order: localStorage.getItem('installerSortOrder') || 'newest'
     }
   },
   created() {
-    this.getSubmissions()
+    this.getSubmissions(this.currentURL)
   },
   methods: {
     getSubmissions(url) {
@@ -41,6 +42,7 @@ export default {
         this.totalSubmissions = response.data.count
         this.nextURL = response.data.next
         this.previousURL = response.data.previous
+        console.log(response.data.results.length)
         for (let i = 0; i < response.data.results.length; i++) {
           const submission = response.data.results[i]
           if (submission.version_set.length === 0) {
@@ -52,13 +54,16 @@ export default {
       })
     },
     onPreviousClick() {
+      localStorage.setItem('installerCurrentURL', this.previousURL)
       this.getSubmissions(this.previousURL)
     },
     onNextClick() {
+      localStorage.setItem('installerCurrentURL', this.nextURL)
       this.getSubmissions(this.nextURL)
     },
     onSortBy(order) {
       this.order = order
+      localStorage.setItem('installerSortOrder', this.order)
       this.getSubmissions()
     }
   }
