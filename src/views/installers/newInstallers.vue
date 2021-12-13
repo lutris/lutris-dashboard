@@ -1,5 +1,13 @@
 <template>
   <div class="app-container">
+    <p>Total new installers: {{ totalInstallers }}
+      |
+      <a v-if="previousURL" href="#" @click="onPreviousClick">Previous</a>
+      <a v-if="nextURL" href="#" @click="onNextClick">Next</a>
+      |
+      <a v-if="order=='newest'" href="#" @click="onSortBy('oldest')">Sort by oldest</a>
+      <a v-if="order=='oldest'" href="#" @click="onSortBy('newest')">Sort by newest</a>
+    </p>
     <new-installers-table
       :loading="loading"
       :new-installers="newInstallers" />
@@ -15,23 +23,44 @@ export default {
   data() {
     return {
       newInstallers: null,
-      loading: false
+      totalInstallers: 0,
+      loading: false,
+      currentURL: localStorage.getItem('newInstallersCurrentURL'),
+      nextURL: null,
+      previousURL: null,
+      order: localStorage.getItem('newInstallersSortOrder') || 'newest'
     }
   },
   created() {
-    this.getNewInstallers()
+    this.getNewInstallers(this.currentURL)
   },
   methods: {
-    getNewInstallers() {
+    getNewInstallers(url) {
       this.loading = true
-      fetchNewInstallers().then(response => {
+      fetchNewInstallers(url, this.order).then(response => {
         this.newInstallers = []
+        this.totalInstallers = response.data.count
+        this.nextURL = response.data.next
+        this.previousURL = response.data.previous
         for (let i = 0; i < response.data.results.length; i++) {
           const newInstaller = response.data.results[i]
           this.newInstallers.push(newInstaller)
         }
         this.loading = false
       })
+    },
+    onPreviousClick() {
+      localStorage.setItem('newInstallersCurrentURL', this.previousURL)
+      this.getNewInstallers(this.previousURL)
+    },
+    onNextClick() {
+      localStorage.setItem('newInstallersCurrentURL', this.nextURL)
+      this.getNewInstallers(this.nextURL)
+    },
+    onSortBy(order) {
+      this.order = order
+      localStorage.setItem('newInstallersSortOrder', this.order)
+      this.getNewInstallers()
     }
   }
 }

@@ -35,11 +35,21 @@ export function fetchDrafts() {
   })
 }
 
-export function fetchNewInstallers() {
+export function fetchNewInstallers(url, order = 'newest') {
+  let paramObj = new URLSearchParams()
+  if (url) {
+    const apiURL = new URL(url)
+    url = apiURL.pathname
+    paramObj = new URLSearchParams(apiURL.search)
+  } else {
+    url = '/api/installers'
+  }
+  paramObj.set('order', order)
+  paramObj.set('status', 'new')
   return request({
-    url: '/api/installers',
+    url: url,
     method: 'get',
-    params: { status: 'new' }
+    params: paramsToObject(paramObj.entries())
   })
 }
 
