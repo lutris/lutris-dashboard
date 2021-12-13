@@ -145,8 +145,8 @@ export default {
       currentRevisionId: null,
       submissionLoading: false,
       revisionsLoading: false,
-      showCharDiff: true,
-      viewType: 'inline'
+      showCharDiff: localStorage.getItem('showCharDiff') || false,
+      viewType: localStorage.getItem('diffViewType') || 'inline'
     }
   },
   computed: {
@@ -230,9 +230,11 @@ export default {
       } else {
         this.viewType = 'inline'
       }
+      localStorage.setItem('diffViewType', this.viewType)
     },
     onToggleCharDiff() {
       this.showCharDiff = !this.showCharDiff
+      localStorage.setItem('showCharDiff', this.showCharDiff)
     },
     onInstallerSelect(version) {
       for (const installer of this.comparedGame.installers) {
