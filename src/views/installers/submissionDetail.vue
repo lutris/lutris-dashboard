@@ -145,7 +145,7 @@ export default {
       currentRevisionId: null,
       submissionLoading: false,
       revisionsLoading: false,
-      showCharDiff: localStorage.getItem('showCharDiff') || false,
+      showCharDiff: localStorage.getItem('showCharDiff') === 'true' || false,
       viewType: localStorage.getItem('diffViewType') || 'inline'
     }
   },

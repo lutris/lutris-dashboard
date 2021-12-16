@@ -42,7 +42,6 @@ export default {
         this.totalSubmissions = response.data.count
         this.nextURL = response.data.next
         this.previousURL = response.data.previous
-        console.log(response.data.results.length)
         for (let i = 0; i < response.data.results.length; i++) {
           const submission = response.data.results[i]
           if (submission.version_set.length === 0) {
