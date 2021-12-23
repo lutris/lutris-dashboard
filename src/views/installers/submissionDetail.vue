@@ -21,7 +21,8 @@
 
       <div>
         Submission for <strong>{{ submission.slug }}</strong> by {{ submission.user }}<br>
-        Original installer updated at {{ updatedAt }}<br>
+        Original installer {{ originalInstaller.slug }} (published: {{ originalInstaller.published }}
+        , draft: {{ originalInstaller.draft }}) updated at {{ updatedAt }}<br>
         Sent on {{ submittedAt }}
         <div>
           <game-search-input :on-select="onGameSelected" />
