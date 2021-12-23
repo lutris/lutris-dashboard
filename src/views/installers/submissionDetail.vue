@@ -20,10 +20,13 @@
       </h1>
 
       <div>
-        Submission for <strong>{{ submission.slug }}</strong> by {{ submission.user }}<br>
-        Original installer {{ originalInstaller.slug }} (published: {{ originalInstaller.published }}
-        , draft: {{ originalInstaller.draft }}) updated at {{ updatedAt }}<br>
-        Sent on {{ submittedAt }}
+        <p>Submission for <strong>{{ submission.slug }}</strong> by {{ submission.user }}</p>
+        <p v-if="originalInstaller">
+          Original installer {{ originalInstaller.slug }} (published: {{ originalInstaller.published }}
+          , draft: {{ originalInstaller.draft }}) updated at {{ updatedAt }}
+        </p>
+        <p>Sent on {{ submittedAt }}</p>
+
         <div>
           <game-search-input :on-select="onGameSelected" />
           <el-select
