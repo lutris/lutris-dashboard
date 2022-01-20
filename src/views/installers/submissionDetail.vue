@@ -107,6 +107,13 @@
         field="content"
         label="Script" />
       <div>
+        <textarea
+          id="reviewBox"
+          ref="reviewBox"
+          v-model="submission.review"
+        />
+      </div>
+      <div>
         <button
           id="acceptSubmission"
           class="el-button el-button--primary el-button--small"
@@ -127,7 +134,7 @@
 </template>
 
 <script>
-import { fetchSubmission, fetchRevisions, acceptSubmission, deleteSubmission } from '@/api/installers'
+import { fetchSubmission, fetchRevisions, acceptSubmission, rejectSubmission } from '@/api/installers'
 import { Message } from 'element-ui'
 import moment from 'moment'
 import { getGame } from '@/api/games'
@@ -219,9 +226,9 @@ export default {
       })
     },
     onRejectSubmission() {
-      deleteSubmission(this.revisionId).then(response => {
+      rejectSubmission(this.submission).then(response => {
         Message({
-          message: 'Submission has been deleted',
+          message: 'Submission has been rejected',
           type: 'info',
           duration: 5000
         })

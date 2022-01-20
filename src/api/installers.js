@@ -102,10 +102,13 @@ export function acceptSubmission(submission) {
   })
 }
 
-export function deleteSubmission(id) {
+export function rejectSubmission(submission) {
+  const id = submission.revision_id
+  submission.action = 'reject'
   return request({
     url: `/api/installers/revisions/${id}`,
-    method: 'delete'
+    method: 'put',
+    data: submission
   })
 }
 
