@@ -107,11 +107,15 @@
         field="content"
         label="Script" />
       <div>
-        <textarea
-          id="reviewBox"
-          ref="reviewBox"
-          v-model="submission.review"
-        />
+        <label>Review (this will be emailed to the script author, only used for rejection)</label>
+        <div>
+          <textarea
+            id="reviewBox"
+            ref="reviewBox"
+            v-model="submission.review"
+            style="width: 100%; margin-bottom: 1em;"
+          />
+        </div>
       </div>
       <div>
         <button
