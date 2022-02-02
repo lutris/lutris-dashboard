@@ -25,6 +25,7 @@
           Original installer {{ originalInstaller.slug }} (published: {{ originalInstaller.published }}
           , draft: {{ originalInstaller.draft }}) updated at {{ updatedAt }}
         </p>
+        <p v-else>No original installer for submission</p>
         <p>Sent on {{ submittedAt }}</p>
 
         <div>
