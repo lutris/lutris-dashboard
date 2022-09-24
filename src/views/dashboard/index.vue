@@ -2,7 +2,10 @@
   <div class="dashboard-container">
     <div class="info-container">
       <p>Games: {{ stats.games }}</p>
-      <p>Submissions: <a href="/#/games/game_submissions">{{ stats.game_submissions }}</a></p>
+      <p>
+        Submissions:
+        <a href="/#/games/game_submissions">{{ stats.game_submissions }}</a>
+      </p>
       <p>Unpublished games: {{ stats.unpublished_games }}</p>
       <p>Installers : {{ stats.installers }}</p>
       <p>Unpublished installers: {{ stats.unpublished_installers }}</p>
@@ -14,49 +17,51 @@
 </template>
 
 <script>
-import { fetchStats } from '@/api/games'
-export default {
-  name: 'Dashboard',
+import { fetchStats } from "@/api/games";
+
+const AppDashboard = {
+  name: "AppDashboard",
   components: {},
   data() {
     return {
       statsLoading: false,
       stats: {
-        'games': 0,
-        'game_submissions': 0,
-        'unpublished_games': 0,
-        'published_games': 0,
-        'installers': 0,
-        'unpublished_installers': 0,
-        'drafts': 0,
-        'screenshots': 0,
-        'unpublished_screenshots': 0
-      }
-    }
+        games: 0,
+        game_submissions: 0,
+        unpublished_games: 0,
+        published_games: 0,
+        installers: 0,
+        unpublished_installers: 0,
+        drafts: 0,
+        screenshots: 0,
+        unpublished_screenshots: 0,
+      },
+    };
   },
-  computed: {},
   created() {
-    this.getStats()
+    this.getStats();
   },
   methods: {
     getStats() {
-      this.statsLoading = true
-      fetchStats().then(response => {
-        this.stats = response.data
-        this.statsLoading = false
-      })
-    }
-  }
-}
+      this.statsLoading = true;
+      fetchStats().then((response) => {
+        this.stats = response.data;
+        this.statsLoading = false;
+      });
+    },
+  },
+};
+
+export default AppDashboard
 </script>
 
 <style rel="stylesheet/scss" lang="scss" scoped>
-  .dashboard-container {
-    padding: 50px 60px 0px;
+.dashboard-container {
+  padding: 50px 60px 0px;
 
-    .info-container {
-      font-size: 2em;
-      color: #414141;
-    }
+  .info-container {
+    font-size: 2em;
+    color: #414141;
   }
+}
 </style>

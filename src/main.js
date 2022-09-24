@@ -1,41 +1,35 @@
-import Vue from 'vue'
+import { createApp } from "vue";
+import App from "./App.vue";
+import ElementPlus from 'element-plus'
 
 import Cookies from 'js-cookie'
 
-import 'normalize.css/normalize.css' // A modern alternative to CSS resets
+import 'normalize.css/normalize.css' // a modern alternative to CSS resets
 
-import Element from 'element-ui'
-import 'element-ui/lib/theme-chalk/index.css'
+import 'element-plus/theme-chalk/index.css'
+import 'element-plus/theme-chalk/dark/css-vars.css'
 
-import '@/styles/index.scss' // global css
-
-import App from './App'
 import store from './store'
-import router from './router'
+import router from "./router";
 
-import i18n from './lang' // Internationalization
-import './icons' // icon
-import './errorLog' // error log
-import './permission' // permission control
+import "@/styles/main.scss";
 
-import * as filters from './filters' // global filters
+import './permission.js'
 
-Vue.use(Element, {
-  size: Cookies.get('size') || 'medium', // set element-ui default size
-  i18n: (key, value) => i18n.t(key, value)
+import * as ElementPlusIconsVue from '@element-plus/icons-vue'
+
+
+
+const app = createApp(App);
+for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
+    app.component(key, component)
+}
+
+app.use(ElementPlus, {
+    size: Cookies.get('size') || 'medium', // set element-ui default size
 })
+app.use(router);
+app.use(store);
+app.mount("#app");
 
-// register global utility filters.
-Object.keys(filters).forEach(key => {
-  Vue.filter(key, filters[key])
-})
-
-Vue.config.productionTip = false
-
-new Vue({
-  el: '#app',
-  router,
-  store,
-  i18n,
-  render: h => h(App)
-})
+export default app;

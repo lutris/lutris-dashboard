@@ -1,26 +1,34 @@
 <template>
   <div class="navbar">
-    <hamburger :toggle-click="toggleSideBar" :is-active="sidebar.opened" class="hamburger-container"/>
+    <hamburger
+      :toggle-click="toggleSideBar"
+      :is-active="sidebar.opened"
+      class="hamburger-container"
+    />
 
-    <breadcrumb class="breadcrumb-container"/>
+    <breadcrumb class="breadcrumb-container" />
 
     <div class="right-menu">
-      <template v-if="device!=='mobile'">
-        <error-log class="errLog-container right-menu-item"/>
+      <template v-if="device !== 'mobile'">
+        <error-log class="errLog-container right-menu-item" />
       </template>
 
       <el-dropdown class="avatar-container right-menu-item" trigger="click">
         <div class="avatar-wrapper">
-          <img :src="avatar" class="user-avatar">
-          <i class="el-icon-caret-bottom"/>
+          <img :src="avatar" class="user-avatar" />
+          <i class="el-icon-caret-bottom" />
         </div>
-        <el-dropdown-menu slot="dropdown">
-          <router-link to="/">
-            <el-dropdown-item>Dashboard</el-dropdown-item>
-          </router-link>
-          <el-dropdown-item divided>
-            <span style="display:block;" @click="logout">{{ $t('navbar.logOut') }}</span>
-          </el-dropdown-item>
+        <el-dropdown-menu>
+          <template v-slot:dropdown>
+            <router-link to="/">
+              <el-dropdown-item>Dashboard</el-dropdown-item>
+            </router-link>
+            <el-dropdown-item divided>
+              <span style="display: block" @click="logout">{{
+                $t("navbar.logOut")
+              }}</span>
+            </el-dropdown-item>
+          </template>
         </el-dropdown-menu>
       </el-dropdown>
     </div>
@@ -28,36 +36,32 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
-import Breadcrumb from '@/components/Breadcrumb'
-import Hamburger from '@/components/Hamburger'
-import ErrorLog from '@/components/ErrorLog'
+import { mapGetters } from "vuex";
+import Breadcrumb from "@/components/Breadcrumb/index.vue";
+import Hamburger from "@/components/Hamburger/index.vue";
+import ErrorLog from "@/components/ErrorLog/index.vue";
 
 export default {
+  name: "NavBar",
   components: {
     Breadcrumb,
     Hamburger,
-    ErrorLog
+    ErrorLog,
   },
   computed: {
-    ...mapGetters([
-      'sidebar',
-      'name',
-      'avatar',
-      'device'
-    ])
+    ...mapGetters(["sidebar", "name", "avatar", "device"]),
   },
   methods: {
     toggleSideBar() {
-      this.$store.dispatch('toggleSideBar')
+      this.$store.dispatch("toggleSideBar");
     },
     logout() {
-      this.$store.dispatch('LogOut').then(() => {
-        location.reload()// In order to re-instantiate the vue-router object to avoid bugs
-      })
-    }
-  }
-}
+      this.$store.dispatch("LogOut").then(() => {
+        location.reload(); // In order to re-instantiate the vue-router object to avoid bugs
+      });
+    },
+  },
+};
 </script>
 
 <style rel="stylesheet/scss" lang="scss" scoped>
@@ -71,7 +75,7 @@ export default {
     float: left;
     padding: 0 10px;
   }
-  .breadcrumb-container{
+  .breadcrumb-container {
     float: left;
   }
   .errLog-container {
@@ -81,8 +85,8 @@ export default {
   .right-menu {
     float: right;
     height: 100%;
-    &:focus{
-     outline: none;
+    &:focus {
+      outline: none;
     }
     .right-menu-item {
       display: inline-block;

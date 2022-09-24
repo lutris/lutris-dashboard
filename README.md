@@ -1,50 +1,35 @@
+# lutris-dashboard
 
-## Introduction
+This template should help get you started developing with Vue 3 in Vite.
 
-This is the moderator's dashboard for Lutris built with [vue-element-admin](http://panjiachen.github.io/vue-element-admin). It is based on [vue](https://github.com/vuejs/vue) and uses the UI Toolkit [element](https://github.com/ElemeFE/element).
+## Recommended IDE Setup
 
-## Getting started
+[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
 
-```bash
-# clone the project
-git clone https://github.com/lutris/lutris-dashboard.git
+## Customize configuration
 
-# install dependencies
+See [Vite Configuration Reference](https://vitejs.dev/config/).
+
+## Project Setup
+
+```sh
 npm install
+```
 
-# develop
+### Compile and Hot-Reload for Development
+
+```sh
 npm run dev
 ```
 
-This will automatically open http://localhost:9527.
+### Compile and Minify for Production
 
-## Build
-
-```bash
-# build for test environment
-npm run build:sit
-
-# build for production environment
-npm run build:prod
+```sh
+npm run build
 ```
 
-## Advanced
+### Lint with [ESLint](https://eslint.org/)
 
-```bash
-# --report to build with bundle size analytics
-npm run build:prod --report
-
-# --generate a bundle size analytics. default: bundle-report.html
-npm run build:prod --generate_report
-
-# --preview to start a server in local to preview
-npm run build:prod --preview
-
-# lint code
+```sh
 npm run lint
-
-# auto fix
-npm run lint -- --fix
 ```
-
-Refer to [Documentation](https://panjiachen.github.io/vue-element-admin-site/guide/essentials/deploy.html) for more information

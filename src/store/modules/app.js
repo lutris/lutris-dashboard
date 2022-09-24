@@ -1,59 +1,61 @@
-import Cookies from 'js-cookie'
+import Cookies from "js-cookie";
 
 const app = {
   state: {
     sidebar: {
-      opened: Cookies.get('sidebarStatus') ? !!+Cookies.get('sidebarStatus') : true,
-      withoutAnimation: false
+      opened: Cookies.get("sidebarStatus")
+        ? !!+Cookies.get("sidebarStatus")
+        : true,
+      withoutAnimation: false,
     },
-    device: 'desktop',
-    language: Cookies.get('language') || 'en',
-    size: Cookies.get('size') || 'medium'
+    device: "desktop",
+    language: Cookies.get("language") || "en",
+    size: Cookies.get("size") || "medium",
   },
   mutations: {
-    TOGGLE_SIDEBAR: state => {
-      state.sidebar.opened = !state.sidebar.opened
-      state.sidebar.withoutAnimation = false
+    TOGGLE_SIDEBAR: (state) => {
+      state.sidebar.opened = !state.sidebar.opened;
+      state.sidebar.withoutAnimation = false;
       if (state.sidebar.opened) {
-        Cookies.set('sidebarStatus', 1)
+        Cookies.set("sidebarStatus", 1, { sameSite:'strict' });
       } else {
-        Cookies.set('sidebarStatus', 0)
+        Cookies.set("sidebarStatus", 0, { sameSite:'strict' });
       }
     },
     CLOSE_SIDEBAR: (state, withoutAnimation) => {
-      Cookies.set('sidebarStatus', 0)
-      state.sidebar.opened = false
-      state.sidebar.withoutAnimation = withoutAnimation
+      Cookies.set("sidebarStatus", 0, { sameSite:'strict' });
+      state.sidebar.opened = false;
+      state.sidebar.withoutAnimation = withoutAnimation;
     },
     TOGGLE_DEVICE: (state, device) => {
-      state.device = device
+      state.device = device;
     },
     SET_LANGUAGE: (state, language) => {
-      state.language = language
-      Cookies.set('language', language)
+      state.language = language;
+      Cookies.set("language", language, { sameSite:'strict' });
     },
     SET_SIZE: (state, size) => {
-      state.size = size
-      Cookies.set('size', size)
-    }
+      state.size = size;
+      Cookies.set("size", size, { sameSite:'strict' });
+    },
   },
   actions: {
     toggleSideBar({ commit }) {
-      commit('TOGGLE_SIDEBAR')
+      commit("TOGGLE_SIDEBAR");
     },
     closeSideBar({ commit }, { withoutAnimation }) {
-      commit('CLOSE_SIDEBAR', withoutAnimation)
+      commit("CLOSE_SIDEBAR", withoutAnimation);
     },
     toggleDevice({ commit }, device) {
-      commit('TOGGLE_DEVICE', device)
+      commit("TOGGLE_DEVICE", device);
     },
     setLanguage({ commit }, language) {
-      commit('SET_LANGUAGE', language)
+      commit("SET_LANGUAGE", language);
     },
     setSize({ commit }, size) {
-      commit('SET_SIZE', size)
-    }
-  }
-}
+      commit("SET_SIZE", size);
+    },
+  },
+};
 
-export default app
+export default app;

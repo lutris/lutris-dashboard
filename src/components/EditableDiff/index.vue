@@ -1,95 +1,99 @@
 <template>
   <div>
-    <h3>{{ label }}
+    <h3>
+      {{ label }}
       <a class="edit-link" href="#" @click="toggleEditMode">Edit</a>
     </h3>
     <div v-if="editMode && value" class="diff">
-      <textarea
-        id="editBox"
-        ref="editBox"
-        v-model="value[field]"
-      />
+      <textarea id="editBox" ref="editBox" v-model="value[field]" />
     </div>
-    <pre v-else :class="{ chardiff: charDiff }" class="prettydiff" v-html="diff" />
+    <pre
+      v-else
+      :class="{ chardiff: charDiff }"
+      class="prettydiff"
+      v-html="diff"
+    />
   </div>
 </template>
 
 <script>
-import prettydiff from 'prettydiff'
+import prettydiff from "prettydiff";
 
 export default {
-  name: 'EditableDiff',
+  name: "EditableDiff",
   props: {
     label: {
       type: String,
-      default: 'Label'
-    },
-    value: {
-      type: Object,
-      default: () => {}
+      default: "Label",
     },
     original: {
       type: Object,
-      default: null
+      default: null,
     },
     field: {
       type: String,
-      default: ''
+      default: "",
     },
     viewType: {
       type: String,
-      default: 'inline'
+      default: "inline",
     },
     charDiff: {
       type: Boolean,
-      default: true
-    }
+      default: true,
+    },
   },
   data() {
     return {
-      editMode: false
-    }
+      editMode: false,
+      value: {},
+    };
   },
   computed: {
     diff() {
       if (this.original && this.value) {
-        return this.outputDiff(this.original[this.field], this.value[this.field], this.viewType)
+        return this.outputDiff(
+          this.original[this.field],
+          this.value[this.field],
+          this.viewType
+        );
       }
       if (this.value) {
-        return this.value[this.field]
+        return this.value[this.field];
       }
-    }
+      return "";
+    },
   },
   methods: {
     outputDiff(originalText, newText, viewType) {
       if (!originalText) {
-        originalText = ''
+        originalText = "";
       }
       if (!newText) {
-        newText = ''
+        newText = "";
       }
-      originalText = originalText.replace(/\r\n/g, '\n')
-      newText = newText.replace(/\r\n/g, '\n')
-      prettydiff.options.mode = 'diff'
-      prettydiff.options.language = 'text'
-      prettydiff.options.diff_format = 'html'
-      prettydiff.options.diff_space_ignore = false
-      prettydiff.options.diff_view = viewType
-      prettydiff.options.source = originalText
-      prettydiff.options.diff = newText
-      return prettydiff()
+      originalText = originalText.replace(/\r\n/g, "\n");
+      newText = newText.replace(/\r\n/g, "\n");
+      prettydiff.options.mode = "diff";
+      prettydiff.options.language = "text";
+      prettydiff.options.diff_format = "html";
+      prettydiff.options.diff_space_ignore = false;
+      prettydiff.options.diff_view = viewType;
+      prettydiff.options.source = originalText;
+      prettydiff.options.diff = newText;
+      return prettydiff();
     },
     toggleEditMode() {
-      this.editMode = !this.editMode
+      this.editMode = !this.editMode;
       this.$nextTick().then(() => {
-        const editBox = this.$refs.editBox
+        const editBox = this.$refs.editBox;
         if (editBox) {
-          editBox.setAttribute('style', `height: ${editBox.scrollHeight}px`)
+          editBox.setAttribute("style", `height: ${editBox.scrollHeight}px`);
         }
-      })
-    }
-  }
-}
+      });
+    },
+  },
+};
 </script>
 
 <style lang="scss">
@@ -106,21 +110,21 @@ export default {
 .chardiff {
   em {
     outline: 1px dotted salmon;
-    background-color: #FFC46C;
+    background-color: #ffc46c;
     line-height: 0.8em;
     padding: 0;
   }
 }
 .diff {
-  background-color: #E4F1FE;
+  background-color: #e4f1fe;
   display: flex;
-  font-family: 'Courier New', Courier, monospace;
+  font-family: "Courier New", Courier, monospace;
   overflow: auto;
   padding: 0 1em;
   textarea {
     width: 100%;
-    padding: .5em;
-    font-family: Courier New,Courier,monospace;
+    padding: 0.5em;
+    font-family: Courier New, Courier, monospace;
   }
   ol {
     padding: 0;
@@ -134,31 +138,33 @@ export default {
   li {
     line-height: 1.4em;
   }
-  h3.texttitle, p.author {
+  h3.texttitle,
+  p.author {
     display: none;
   }
   .delete {
-    background-color: #FFCFF7;
+    background-color: #ffcff7;
   }
   .equal {
-    background-color: #E4F1FE;
+    background-color: #e4f1fe;
   }
   .insert {
-    background-color: #C4FCDC;
+    background-color: #c4fcdc;
   }
   .empty {
     line-height: 1em;
     height: 1em;
-    background-color: #FFCFF7;
+    background-color: #ffcff7;
   }
 
   .replace {
-    background-color: #FFEED5;
+    background-color: #ffeed5;
   }
   .diff-left {
-    border-right: 2px solid #AAA;
+    border-right: 2px solid #aaa;
   }
-  .diff-left, .diff-right {
+  .diff-left,
+  .diff-right {
     padding: 0 0.5em;
     width: 50%;
     overflow: scroll;

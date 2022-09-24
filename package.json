@@ -1,89 +1,34 @@
 {
   "name": "lutris-dashboard",
-  "version": "0.0.1",
-  "description": "A dashboard for lutris moderators. Used to publish installers and such.",
-  "author": "Mathieu Comandon <strycore@gmail.com>",
-  "license": "GPL-3.0",
+  "version": "0.0.0",
   "scripts": {
-    "start": "webpack serve --config config/webpack.dev.js --progress",
-    "build": "webpack --config config/webpack.prod.js",
-    "prod": "http-server ./dist -a localhost -p 8000 -o",
-
-    "dev": "cross-env BABEL_ENV=development webpack-dev-server --progress --config build/webpack.dev.conf.js",
-    "build:prod": "cross-env NODE_ENV=production env_config=prod node build/build.js",
-    "build:sit": "cross-env NODE_ENV=production env_config=sit node build/build.js",
-    "lint": "eslint --ext .js,.vue src",
-    "test": "npm run lint",
-    "precommit": "lint-staged",
-    "svgo": "svgo -f src/icons/svg --config=src/icons/svgo.yml"
-  },
-  "lint-staged": {
-    "src/**/*.{js,vue}": [
-      "eslint --fix",
-      "git add"
-    ]
-  },
-  "keywords": [],
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/lutris/lutris-dashboard.git"
-  },
-  "bugs": {
-    "url": "https://github.com/lutris/lutris-dashboard/issues"
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview --port 4173",
+    "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs --fix --ignore-path .gitignore"
   },
   "dependencies": {
-    "@babel/runtime": "^7.12.5",
-    "core-js": "^3.10.0",
-    "vue": "^2.6.12",
-    "vue-router": "^3.4.9",
-    "whatwg-fetch": "^3.6.2",
-
-    "axios": "0.24.0",
-    "clipboard": "1.7.1",
-    "connect": "3.6.6",
-    "driver.js": "0.8.1",
-    "element-ui": "^2.13.2",
-    "js-cookie": "2.2.0",
-    "jsonlint": "1.6.3",
-    "mockjs": "1.0.1-beta3",
-    "moment": "^2.24.0",
-    "normalize.css": "7.0.0",
-    "nprogress": "0.2.0",
-    "prettier": "^1.18.2",
-    "prettydiff": "101.2.6",
-    "sortablejs": "1.7.0",
-    "vue-i18n": "7.3.2",
-    "vuex": "3.4.0"
+    "@element-plus/icons-vue": "^2.0.9",
+    "axios": "^0.27.2",
+    "element-plus": "^2.2.17",
+    "js-cookie": "^3.0.1",
+    "normalize.css": "^8.0.1",
+    "path-to-regexp": "^6.2.1",
+    "pinia": "^2.0.21",
+    "prettydiff": "^101.2.6",
+    "require-context": "^1.1.0",
+    "vue": "^3.2.38",
+    "vue-router": "^4.1.5",
+    "vuex": "^4.0.2"
   },
   "devDependencies": {
-    "@babel/core": "^7.12.1",
-    "@babel/plugin-proposal-class-properties": "^7.12.1",
-    "@babel/plugin-proposal-object-rest-spread": "^7.12.1",
-    "@babel/plugin-transform-arrow-functions": "^7.12.1",
-    "@babel/plugin-transform-async-to-generator": "^7.12.1",
-    "@babel/plugin-transform-runtime": "^7.12.10",
-    "@babel/preset-env": "^7.12.1",
-    "babel-loader": "^8.1.0",
-    "clean-webpack-plugin": "^3.0.0",
-    "copy-webpack-plugin": "^6.2.1",
-    "cross-env": "^7.0.2",
-    "css-loader": "^5.0.0",
-    "css-minimizer-webpack-plugin": "^1.1.5",
-    "html-webpack-plugin": "^5.0.0-alpha.7",
-    "http-server": "^0.12.3",
-    "mini-css-extract-plugin": "^1.0.0",
-    "node-sass": "^4.14.1",
-    "path": "^0.12.7",
-    "postcss-loader": "^4.0.4",
-    "postcss-preset-env": "^6.7.0",
-    "sass-loader": "^10.0.3",
-    "style-loader": "^2.0.0",
-    "vue-loader": "^15.9.6",
-    "vue-style-loader": "^4.1.2",
-    "vue-template-compiler": "^2.6.12",
-    "webpack": "^5.1.3",
-    "webpack-cli": "^4.3.1",
-    "webpack-dev-server": "^3.11.0",
-    "webpack-merge": "^5.2.0"
+    "@rushstack/eslint-patch": "^1.1.4",
+    "@vitejs/plugin-vue": "^3.1.0",
+    "@vue/eslint-config-prettier": "^7.0.0",
+    "eslint": "^8.22.0",
+    "eslint-plugin-vue": "^9.3.0",
+    "prettier": "^2.7.1",
+    "sass": "^1.54.9",
+    "vite": "^3.0.9"
   }
 }

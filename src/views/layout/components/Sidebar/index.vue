@@ -1,5 +1,6 @@
 <template>
   <el-scrollbar wrap-class="scrollbar-wrapper">
+
     <el-menu
       :show-timeout="200"
       :default-active="$route.path"
@@ -9,29 +10,32 @@
       :active-text-color="variables.menuActiveText"
       mode="vertical"
     >
-      <sidebar-item v-for="route in permission_routers" :key="route.path" :item="route" :base-path="route.path"/>
+      <sidebar-item
+        v-for="route in permission_routers"
+        :key="route.path"
+        :item="route"
+        :base-path="route.path"
+      />
     </el-menu>
   </el-scrollbar>
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
-import SidebarItem from './SidebarItem'
-import variables from '@/styles/variables.scss'
+import { mapGetters } from "vuex";
+import SidebarItem from "./SidebarItem.vue";
+import variables from "@/styles/variables.scss";
 
 export default {
+  name: "SideBar",
   components: { SidebarItem },
   computed: {
-    ...mapGetters([
-      'permission_routers',
-      'sidebar'
-    ]),
+    ...mapGetters(["permission_routers", "sidebar"]),
     variables() {
-      return variables
+      return variables;
     },
     isCollapse() {
-      return !this.sidebar.opened
-    }
-  }
-}
+      return !this.sidebar.opened;
+    },
+  },
+};
 </script>
