@@ -12,11 +12,9 @@
 
 <script>
 import { searchGames } from '@/api/games'
-import GameCard from '@/components/GameCard'
 
 export default {
   name: 'GameSearchInput',
-  components: { GameCard },
   props: {
     onSelect: {
       type: Function,

@@ -29,22 +29,23 @@ const devWebpackConfig = merge(baseWebpackConfig, {
 
   // these devServer options should be customized in /config/index.js
   devServer: {
-    clientLogLevel: 'warning',
+    devMiddleware: {
+      index: true,
+      mimeTypes: { phtml: 'text/html' },
+      publicPath: '/'
+    },
+    contentBase: path.join(__dirname, '..', 'dist'),
     historyApiFallback: true,
     hot: true,
     compress: true,
     host: HOST || config.dev.host,
     port: PORT || config.dev.port,
     open: config.dev.autoOpenBrowser,
-    overlay: config.dev.errorOverlay
-      ? { warnings: false, errors: true }
-      : false,
-    publicPath: config.dev.assetsPublicPath,
-    proxy: config.dev.proxyTable,
-    quiet: true, // necessary for FriendlyErrorsPlugin
-    watchOptions: {
-      poll: config.dev.poll
-    }
+    // overlay: config.dev.errorOverlay
+    //   ? { warnings: false, errors: true }
+    //   : false,
+    // publicPath: config.dev.assetsPublicPath,
+    proxy: config.dev.proxyTable
   },
   plugins: [
     new webpack.DefinePlugin({
