@@ -8,7 +8,7 @@
 </template>
 
 <script>
-import SubmissionTable from './submissionTable'
+import SubmissionTable from './submissionTable.vue'
 import { fetchDrafts } from '@/api/installers'
 export default {
   name: 'Drafts',

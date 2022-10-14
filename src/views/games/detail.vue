@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import GameCard from '@/components/GameCard'
+import GameCard from '@/components/GameCard/index.vue'
 import { getGame } from '@/api/games'
 
 export default {

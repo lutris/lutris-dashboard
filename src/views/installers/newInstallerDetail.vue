@@ -100,7 +100,7 @@
 
 <script>
 import { fetchInstaller, acceptInstaller, deleteInstaller } from '@/api/installers'
-import { Message } from 'element-ui'
+import { ElMessage } from 'element-plus'
 import moment from 'moment'
 import { getGame } from '@/api/games'
 import EditableDiff from '@/components/EditableDiff'
@@ -166,7 +166,7 @@ export default {
     },
     onInstallerAccept() {
       acceptInstaller(this.installer).then(response => {
-        Message({
+        ElMessage({
           message: 'Installer has been accepted',
           type: 'info',
           duration: 5000
@@ -176,7 +176,7 @@ export default {
     },
     onInstallerReject() {
       deleteInstaller(this.installer.id).then(response => {
-        Message({
+        ElMessage({
           message: 'Installer deleted',
           type: 'info',
           duration: 5000

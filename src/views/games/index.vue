@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import GameSearchInput from '@/components/GameSearchInput'
+import GameSearchInput from '@/components/GameSearchInput/index.vue'
 
 export default {
   name: 'GamesDashboard',

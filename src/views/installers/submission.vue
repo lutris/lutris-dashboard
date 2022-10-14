@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import SubmissionDetail from './submissionDetail'
+import SubmissionDetail from './submissionDetail.vue'
 export default {
   name: 'Submission',
   components: { SubmissionDetail }

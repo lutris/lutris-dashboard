@@ -1,61 +1,43 @@
-import Cookies from "js-cookie";
+const state = () => ({
+  isCollapse: false, // 侧边栏是否收缩展示
+  contentFullScreen: false, // 内容是否可全屏展示
+  showLogo: true, // 是否显示Logo
+  fixedTop: false, // 是否固定顶部, todo，暂未使用
+  expandOneMenu: true, // 一次是否只能展开一个菜单
+  elementSize: 'small', // element默认尺寸，支持官网四个大小参数
+  theme: {
+    state: {
+      style: 'default',
+      primaryColor: '#409eff',
+      menuType: 'side'
+    }
+  }
+})
 
-const app = {
-  state: {
-    sidebar: {
-      opened: Cookies.get("sidebarStatus")
-        ? !!+Cookies.get("sidebarStatus")
-        : true,
-      withoutAnimation: false,
-    },
-    device: "desktop",
-    language: Cookies.get("language") || "en",
-    size: Cookies.get("size") || "medium",
+// mutations
+const mutations = {
+  isCollapseChange(state, type) {
+    state.isCollapse = type
   },
-  mutations: {
-    TOGGLE_SIDEBAR: (state) => {
-      state.sidebar.opened = !state.sidebar.opened;
-      state.sidebar.withoutAnimation = false;
-      if (state.sidebar.opened) {
-        Cookies.set("sidebarStatus", 1, { sameSite:'strict' });
-      } else {
-        Cookies.set("sidebarStatus", 0, { sameSite:'strict' });
-      }
-    },
-    CLOSE_SIDEBAR: (state, withoutAnimation) => {
-      Cookies.set("sidebarStatus", 0, { sameSite:'strict' });
-      state.sidebar.opened = false;
-      state.sidebar.withoutAnimation = withoutAnimation;
-    },
-    TOGGLE_DEVICE: (state, device) => {
-      state.device = device;
-    },
-    SET_LANGUAGE: (state, language) => {
-      state.language = language;
-      Cookies.set("language", language, { sameSite:'strict' });
-    },
-    SET_SIZE: (state, size) => {
-      state.size = size;
-      Cookies.set("size", size, { sameSite:'strict' });
-    },
+  contentFullScreenChange(state, type) {
+    state.contentFullScreen = type
   },
-  actions: {
-    toggleSideBar({ commit }) {
-      commit("TOGGLE_SIDEBAR");
-    },
-    closeSideBar({ commit }, { withoutAnimation }) {
-      commit("CLOSE_SIDEBAR", withoutAnimation);
-    },
-    toggleDevice({ commit }, device) {
-      commit("TOGGLE_DEVICE", device);
-    },
-    setLanguage({ commit }, language) {
-      commit("SET_LANGUAGE", language);
-    },
-    setSize({ commit }, size) {
-      commit("SET_SIZE", size);
-    },
+  menuListChange(state, arr) {
+    state.menuList = arr
   },
-};
+  stateChange(state, option) {
+    state[option.name] = option.value
+  }
+}
 
-export default app;
+// actions
+const actions = {
+
+}
+
+export default {
+  namespaced: true,
+  state,
+  actions,
+  mutations
+}

@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import GameSubmissionTable from './gameSubmissionTable'
+import GameSubmissionTable from './gameSubmissionTable.vue'
 import { fetchGameSubmissions } from '@/api/games'
 
 export default {

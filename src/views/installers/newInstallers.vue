@@ -15,7 +15,7 @@
 </template>
 
 <script>
-import NewInstallersTable from './newInstallersTable'
+import NewInstallersTable from './newInstallersTable.vue'
 import { fetchNewInstallers } from '@/api/installers'
 export default {
   name: 'NewInstallers',

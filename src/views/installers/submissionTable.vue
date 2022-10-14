@@ -3,12 +3,11 @@
     v-loading="loading"
     key="id"
     :data="submissions"
-    border
     fit
     highlight-current-row>
     <el-table-column label="Comment" prop="comment">
-      <template slot-scope="scope">
-        <a :href="'#/installers/submissions/' + scope.row['id']">{{ scope.row["comment"] }}</a>
+      <template #default="props">
+        <a :href="'#/installers/submissions/' + props.row['id']">{{ props.row["comment"] }}</a>
       </template>
     </el-table-column>
   </el-table>

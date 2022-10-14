@@ -140,11 +140,11 @@
 
 <script>
 import { fetchSubmission, fetchRevisions, acceptSubmission, rejectSubmission } from '@/api/installers'
-import { Message } from 'element-ui'
+import { ElMessage } from 'element-plus'
 import moment from 'moment'
 import { getGame } from '@/api/games'
-import EditableDiff from '@/components/EditableDiff'
-import GameSearchInput from '@/components/GameSearchInput'
+import EditableDiff from '@/components/EditableDiff/index.vue'
+import GameSearchInput from '@/components/GameSearchInput/index.vue'
 
 export default {
   name: 'SubmissionDetail',
@@ -222,7 +222,7 @@ export default {
     },
     onSubmissionAccept() {
       acceptSubmission(this.submission).then(response => {
-        Message({
+        ElMessage({
           message: 'Submission has been accepted',
           type: 'info',
           duration: 5000
@@ -232,7 +232,7 @@ export default {
     },
     onRejectSubmission() {
       rejectSubmission(this.submission).then(response => {
-        Message({
+        ElMessage({
           message: 'Submission has been rejected',
           type: 'info',
           duration: 5000

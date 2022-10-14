@@ -15,7 +15,7 @@
 </template>
 
 <script>
-import SubmissionTable from './submissionTable'
+import SubmissionTable from './submissionTable.vue'
 import { fetchSubmissions } from '@/api/installers'
 export default {
   name: 'Submissions',

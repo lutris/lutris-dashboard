@@ -1,34 +1,35 @@
 {
-  "name": "lutris-dashboard",
+  "name": "init",
   "version": "0.0.0",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
-    "preview": "vite preview --port 4173",
-    "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs --fix --ignore-path .gitignore"
+    "start": "vite",
+    "build": "vite build --mode=production",
+    "build:stag": "vite build --mode=staging",
+    "serve": "vite preview"
   },
   "dependencies": {
-    "@element-plus/icons-vue": "^2.0.9",
-    "axios": "^0.27.2",
-    "element-plus": "^2.2.17",
-    "js-cookie": "^3.0.1",
+    "@element-plus/icons-vue": "^2.0.10",
+    "@vueuse/core": "^9.3.0",
+    "axios": "^1.1.2",
+    "element-plus": "^2.2.18",
+    "mockjs": "^1.1.0",
+    "moment": "^2.29.4",
     "normalize.css": "^8.0.1",
-    "path-to-regexp": "^6.2.1",
-    "pinia": "^2.0.21",
+    "nprogress": "^0.2.0",
     "prettydiff": "^101.2.6",
-    "require-context": "^1.1.0",
-    "vue": "^3.2.38",
-    "vue-router": "^4.1.5",
-    "vuex": "^4.0.2"
+    "throttle-debounce": "^5.0.0",
+    "vue": "^3.2.40",
+    "vue-router": "4",
+    "vuex": "^4.0.0"
   },
   "devDependencies": {
-    "@rushstack/eslint-patch": "^1.1.4",
-    "@vitejs/plugin-vue": "^3.1.0",
-    "@vue/eslint-config-prettier": "^7.0.0",
-    "eslint": "^8.22.0",
-    "eslint-plugin-vue": "^9.3.0",
-    "prettier": "^2.7.1",
-    "sass": "^1.54.9",
-    "vite": "^3.0.9"
+    "@types/node": "^18.8.5",
+    "@vitejs/plugin-vue": "^3.1.2",
+    "@vue/compiler-sfc": "^3.0.5",
+    "sass": "^1.32.12",
+    "vite": "3.1.8",
+    "vite-plugin-mock": "2.9.6",
+    "vue-tsc": "^1.0.7"
   }
 }

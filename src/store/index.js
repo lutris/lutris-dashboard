@@ -1,18 +1,25 @@
-import Vuex from "vuex";
-import app from "./modules/app.js";
-import errorLog from "./modules/errorLog.js";
-import permission from "./modules/permission.js";
-import tagsView from "./modules/tagsView.js";
-import user from "./modules/user.js";
-import getters from "./getters.js";
+import { createStore, createLogger } from 'vuex'
+import Persistent from './plugins/persistent'
+const debug = process.env.NODE_ENV !== 'production'
 
-export default new Vuex.Store({
+const files= import.meta.globEager('./modules/*.js')
+
+let modules = {}
+Object.keys(files).forEach((c) => {
+  const module = files[c].default
+  const moduleName = c.replace(/^\.\/(.*)\/(.*)\.\w+$/, '$2')
+  modules[moduleName] = module
+})
+
+const persistent = Persistent({ key: 'vuex', modules, modulesKeys: {
+  local: Object.keys(modules),
+  session: []
+} })
+
+export default createStore({
   modules: {
-    app,
-    errorLog,
-    permission,
-    tagsView,
-    user,
+    ...modules
   },
-  getters,
-});
+  strict: debug,
+  plugins: debug ? [createLogger(), persistent] : [persistent]
+})

@@ -1,9 +1,9 @@
 <template>
   <div class="app-container">
-    <el-row>
-      <h1>Game merge
-        <span v-if="game_1 && game_2">
-          <el-popconfirm
+    <h1>Game merge</h1>
+    <el-row v-show="game_1 && game_2">
+      <el-col>
+        <el-popconfirm
             confirm-button-text="Yes"
             cancel-button-text="No"
             icon="el-icon-info"
@@ -11,13 +11,14 @@
             title="Merge games? The game on the right will be merged with the left one and deleted."
             @onConfirm="doMerge()"
           >
-            <el-button
-              slot="reference"
-              type="warning"
-              icon="el-icon-connection" />
+            <template #reference>
+              <el-button type="warning">Merge</el-button>
+            </template>
+            
           </el-popconfirm>
-        </span>
-      </h1>
+      </el-col>
+    </el-row>
+    <el-row>
       <el-col :span="12">
         <game-search-input :on-select="onLoadGame1" />
         <div v-if="game_1">
@@ -35,13 +36,16 @@
 </template>
 
 <script>
-import GameSearchInput from '@/components/GameSearchInput'
-import GameCard from '@/components/GameCard'
+import GameSearchInput from '@/components/GameSearchInput/index.vue'
+import GameCard from '@/components/GameCard/index.vue'
 import { getGame, mergeGames } from '@/api/games'
 
 export default {
   name: 'GameMerge',
-  components: { GameSearchInput, GameCard },
+  components: { 
+    GameSearchInput,
+    GameCard
+  },
   data() {
     return {
       game_1: null,
@@ -61,6 +65,7 @@ export default {
       })
     },
     doMerge() {
+      console.log("Merging " +this.game_1.slug)
       mergeGames(this.game_1.slug, this.game_2.slug).then(() => {
         this.game_2 = null
       })

@@ -3,28 +3,27 @@
     v-loading="loading"
     key="id"
     :data="submissions"
-    border
     fit
     highlight-current-row>
     <el-table-column label="Banner" prop="game">
-      <template slot-scope="scope">
-        <img :src="scope.row['game'].banner_url">
+      <template #default="props">
+        <img :src="props.row['game'].banner_url">
       </template>
     </el-table-column>
     <el-table-column label="Name" prop="game">
-      <template slot-scope="scope">
-        <a :href="'#/games/' + scope.row['game'].slug">{{ scope.row["game"].name }}</a>
+      <template #default="props">
+        <a :href="'#/games/' + props.row['game'].slug">{{ props.row["game"].name }}</a>
       </template>
     </el-table-column>
     <el-table-column label="User" prop="user">
-      <template slot-scope="scope">
-        {{ scope.row["user"].username }}<br>
-        {{ scope.row["created_at"] }}<br>
+      <template #default="props">
+        {{ props.row["user"].username }}<br>
+        {{ props.row["created_at"] }}<br>
       </template>
     </el-table-column>
     <el-table-column label="Actions" prop="id">
-      <template slot-scope="scope">
-        <el-button type="warning" @click="acceptSubmission(scope.row['id'])">Accept</el-button>
+      <template #default="props">
+        <el-button type="warning" @click="acceptSubmission(props.row['id'])">Accept</el-button>
       </template>
     </el-table-column>
   </el-table>

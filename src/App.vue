@@ -1,7 +1,32 @@
-<script setup>
-import { RouterView } from "vue-router";
+<template>
+  <el-config-provider :locale="locale">
+    <router-view></router-view>
+  </el-config-provider>
+</template>
+
+<script>
+import { defineComponent } from 'vue'
+import locale from 'element-plus/lib/locale/lang/en'
+export default defineComponent({
+  name: 'App',
+  setup() {
+    return {
+      locale
+    }
+  }
+})
 </script>
 
-<template>
-  <RouterView />
-</template>
+<style>
+#app {
+  font-family: Avenir, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  color: #2c3e50;
+  width: 100%;
+  height: 100vh;
+}
+.app-container {
+  padding: 1em;
+}
+</style>

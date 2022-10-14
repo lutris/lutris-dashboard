@@ -4,6 +4,7 @@
       :fetch-suggestions="getGameSuggestions"
       v-model="game_name"
       class="inline-input"
+      style="width: 90%"
       placeholder="Search for a game…"
       @select="handleSelect"
     />
@@ -11,46 +12,52 @@
 </template>
 
 <script>
-import { searchGames } from "@/api/games";
+import { searchGames } from '@/api/games'
 
 export default {
-  name: "GameSearchInput",
-  components: {},
+  name: 'GameSearchInput',
   props: {
     onSelect: {
       type: Function,
-      default: null,
-    },
+      default: null
+    }
   },
   data() {
     return {
       timeout: null,
-      game_name: "",
-      game: null,
-    };
+      game_name: '',
+      game: null
+    }
   },
   methods: {
     gameMedia(relUrl) {
-      return "https://lutris.net" + relUrl;
+      return 'https://lutris.net' + relUrl
     },
     // Return URL for the submission moderation page
     submissionUrl(revisionId) {
-      return "/#/installers/submissions/" + revisionId;
+      return '/#/installers/submissions/' + revisionId
     },
     getGameSuggestions(queryString, cb) {
       if (queryString.length < 3) {
-        return cb([]);
+        return cb([])
       }
-      searchGames(queryString).then((response) => {
+      searchGames(queryString).then(response => {
         const results = response.data.results.map((item) => {
-          return { value: item.name, slug: item.slug };
-        });
-        cb(results);
-      });
+          return { value: "[" + item.id + "] " + item.name, slug: item.slug }
+        })
+        cb(results)
+      })
     },
     handleSelect(item) {
-      this.onSelect(item.slug);
-    },
-  },
-};
+      this.onSelect(item.slug)
+    }
+  }
+}
 </script>
+
+
+<style scoped>
+input, .game-search-input {
+  width: 400px;
+}
+</style>

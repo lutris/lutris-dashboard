@@ -1,112 +1,80 @@
-import { loginByUsername, getUserInfo } from "@/api/login.js";
-import { getToken, setToken, removeToken } from "@/utils/auth";
+import { loginApi, getInfoApi, loginOutApi } from '@/api/user'
 
-const user = {
-  state: {
-    user: "",
-    status: "",
-    code: "",
-    token: getToken(),
-    name: "",
-    avatar: "",
-    introduction: "",
-    roles: [],
-    setting: {
-      articlePlatform: [],
-    },
+const state = () => ({
+  token: '', // 登录token
+  info: {},  // 用户信息
+})
+
+// getters
+const getters = {
+  token(state) {
+    return state.token
+  }
+}
+
+// mutations
+const mutations = {
+  tokenChange(state, token) {
+    state.token = token
+  },
+  infoChange(state, info) {
+    state.info = info
+  }
+}
+
+
+
+// actions
+const actions = {
+  // login by login.vue
+  login({ commit, dispatch }, params) {
+    return new Promise((resolve, reject) => {
+      loginApi(params)
+      .then(res => {
+        commit('tokenChange', res.data.token)
+        dispatch('getInfo', { token: res.data.token })
+        .then(infoRes => {
+          resolve(res.data.token)
+        })
+      })
+      .catch(res => {
+        console.error("noooo")
+        console.error(res)
+      })
+    })
+  },
+  // get user info after user login
+  getInfo({ commit }, params) {
+    return new Promise((resolve, reject) => {
+      getInfoApi(params)
+      .then(res => {
+        commit('infoChange', res.data.info)
+        resolve(res.data.info)
+      })
+    })
   },
 
-  mutations: {
-    SET_CODE: (state, code) => {
-      state.code = code;
-    },
-    SET_TOKEN: (state, token) => {
-      state.token = token;
-    },
-    SET_INTRODUCTION: (state, introduction) => {
-      state.introduction = introduction;
-    },
-    SET_SETTING: (state, setting) => {
-      state.setting = setting;
-    },
-    SET_STATUS: (state, status) => {
-      state.status = status;
-    },
-    SET_NAME: (state, name) => {
-      state.name = name;
-    },
-    SET_AVATAR: (state, avatar) => {
-      state.avatar = avatar;
-    },
-    SET_ROLES: (state, roles) => {
-      state.roles = roles;
-    },
-  },
+  // login out the system after user click the loginOut button
+  loginOut({ commit }) {
+    loginOutApi()
+    .then(res => {
 
-  actions: {
-    LoginByUsername({ commit }, userInfo) {
-      const username = userInfo.username.trim();
-      return new Promise((resolve, reject) => {
-        loginByUsername(username, userInfo.password)
-          .then((response) => {
-            const data = response.data;
-            commit("SET_TOKEN", data.token);
-            setToken(response.data.token);
-            resolve();
-          })
-          .catch((error) => {
-            console.log(error);
-            reject(error);
-          });
-      });
-    },
+    })
+    .catch(error => {
 
-    GetUserInfo({ commit }) {
-      return new Promise((resolve, reject) => {
-        getUserInfo()
-          .then((response) => {
-            if (!response.data) {
-              reject("Verification failed, please login again.");
-            }
-            const data = response.data;
-            if (!data.is_staff) {
-              reject("This dashboard is restricted to the Lutris staff");
-            }
-            commit("SET_ROLES", ["admin", "editor"]);
-            commit("SET_NAME", data.username);
-            commit("SET_AVATAR", data.avatar_url);
-            resolve(response);
-          })
-          .catch((error) => {
-            console.error("Failed to set user information: " + error);
-            reject(error);
-          });
-      });
-    },
+    })
+    .finally(() => {
+      localStorage.removeItem('tabs')
+      localStorage.removeItem('vuex')
+      location.reload()
+    })
+  }
+}
 
-    LogOut({ commit }) {
-      return new Promise((resolve) => {
-        commit("SET_TOKEN", "");
-        removeToken();
-        resolve();
-      });
-    },
-
-    ChangeRoles({ commit, dispatch }, role) {
-      return new Promise((resolve) => {
-        commit("SET_TOKEN", role);
-        setToken(role);
-        getUserInfo(role).then((response) => {
-          const data = response.data;
-          commit("SET_ROLES", data.roles);
-          commit("SET_NAME", data.name);
-          commit("SET_AVATAR", data.avatar);
-          dispatch("GenerateRoutes", data);
-          resolve();
-        });
-      });
-    },
-  },
-};
-
-export default user;
+export default {
+  namespaced: true,
+  state,
+  actions,
+  getters,
+  mutations
+}
