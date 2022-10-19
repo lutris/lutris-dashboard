@@ -49,13 +49,15 @@ export default {
         this.loading = false
       })
     },
-    onPreviousClick() {
+    onPreviousClick(event) {
       localStorage.setItem('newInstallersCurrentURL', this.previousURL)
       this.getNewInstallers(this.previousURL)
+      event.preventDefault()
     },
-    onNextClick() {
+    onNextClick(event) {
       localStorage.setItem('newInstallersCurrentURL', this.nextURL)
       this.getNewInstallers(this.nextURL)
+      event.preventDefault()
     },
     onSortBy(order) {
       this.order = order

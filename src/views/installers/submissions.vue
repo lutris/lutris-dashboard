@@ -52,13 +52,17 @@ export default {
         this.submissionsLoading = false
       })
     },
-    onPreviousClick() {
+    onPreviousClick(event) {
+      console.log("opifosdifosdiof")
       localStorage.setItem('installerCurrentURL', this.previousURL)
       this.getSubmissions(this.previousURL)
+      event.preventDefault()
     },
-    onNextClick() {
+    onNextClick(event) {
+      console.log(this.nextURL)
       localStorage.setItem('installerCurrentURL', this.nextURL)
       this.getSubmissions(this.nextURL)
+      event.preventDefault()
     },
     onSortBy(order) {
       this.order = order

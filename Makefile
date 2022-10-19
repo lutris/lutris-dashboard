@@ -1,5 +1,5 @@
 deploy:
-	npm run build:prod
+	npm run build
 	rsync -avz --delete dist/ anaheim:~/sites/dashboard
 
 run:

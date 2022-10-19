@@ -103,8 +103,8 @@ import { fetchInstaller, acceptInstaller, deleteInstaller } from '@/api/installe
 import { ElMessage } from 'element-plus'
 import moment from 'moment'
 import { getGame } from '@/api/games'
-import EditableDiff from '@/components/EditableDiff'
-import GameSearchInput from '@/components/GameSearchInput'
+import EditableDiff from '@/components/EditableDiff/index.vue'
+import GameSearchInput from '@/components/GameSearchInput/index.vue'
 
 export default {
   name: 'NewInstallerDetail',
