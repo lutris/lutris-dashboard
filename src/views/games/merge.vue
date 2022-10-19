@@ -9,12 +9,12 @@
             icon="el-icon-info"
             icon-color="red"
             title="Merge games? The game on the right will be merged with the left one and deleted."
-            @onConfirm="doMerge()"
+            @confirm="doMerge"
           >
             <template #reference>
               <el-button type="warning">Merge</el-button>
             </template>
-            
+
           </el-popconfirm>
       </el-col>
     </el-row>
@@ -42,7 +42,7 @@ import { getGame, mergeGames } from '@/api/games'
 
 export default {
   name: 'GameMerge',
-  components: { 
+  components: {
     GameSearchInput,
     GameCard
   },
