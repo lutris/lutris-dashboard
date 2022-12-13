@@ -30,7 +30,12 @@
       :data="game.installers"
       :row-class-name="installerTableRowClass"
       fit>
-      <el-table-column label="Version" prop="version" />
+      <el-table-column label="Version">
+        <template #default="props">
+          <strong>{{props.row["version"]}}</strong>
+          <span>{{props.row["is_playable"]}}</span>
+        </template>
+      </el-table-column>
       <el-table-column label="Revisions">
         <template #default="props">
           <ul v-if="props.row['revisions']">
@@ -53,7 +58,6 @@
           >
           <template #reference>
             <el-button
-              slot="reference"
               type="danger"
               icon="Delete"
               circle />
@@ -64,6 +68,20 @@
             icon="Edit"
             circle
             @click="onShowInstaller(props.row['id'])" />
+          <el-button
+            type="info"
+            icon="ArrowUp"
+            circle
+            @click="onRatingClick(props.row['id'], true)"
+          />
+          <el-button
+            type="info"
+            icon="ArrowDown"
+            circle
+            @click="onRatingClick(props.row['id'], false)"
+          />
+
+
         </template>
       </el-table-column>
     </el-table>
@@ -129,6 +147,9 @@ export default {
           this.installerVisible = true
         }
       }
+    },
+    onRatingClick(installerId, playable) {
+      console.log("TODO sent rating to website")
     }
   }
 }
