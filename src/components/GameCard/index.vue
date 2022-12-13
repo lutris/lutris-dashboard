@@ -35,7 +35,8 @@
         <template #default="props">
           <ul v-if="props.row['revisions']">
             <li v-for="revision in props.row['revisions']" :key="revision.revision_id">
-              <a :href="submissionUrl(revision.revision_id)">Revision by {{ revision.user }}</a>
+              <a :href="submissionUrl(revision.revision_id)">Revision by {{ revision.user }} created {{ dateTime(revision.created_at) }}</a>
+              <span v-if="revision.draft">(Draft)</span>
             </li>
           </ul>
         </template>
@@ -80,7 +81,7 @@
 
 <script>
 import { deleteInstaller } from '@/api/installers'
-
+import moment from 'moment';
 export default {
   name: 'GameCard',
   props: {
@@ -96,6 +97,9 @@ export default {
     }
   },
   methods: {
+    dateTime(value) {
+      return moment(value).fromNow();
+    },
     gameURL(slug) {
       return 'https://lutris.net/games/' + slug
     },
