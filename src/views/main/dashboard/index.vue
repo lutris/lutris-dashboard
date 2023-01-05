@@ -4,7 +4,11 @@
       <p>Games: {{ stats.games }}</p>
       <p>Published games: {{ stats.published_games }}</p>
       <p>Unpublished games: {{ stats.unpublished_games }}</p>
-      <p>Submissions: <a href="/#/games/game_submissions">{{ stats.game_submissions }}</a></p>
+      <hr/>
+
+      <p>Submissions: {{ stats.game_submissions }}</p>
+      <p>Accepted submissions: {{ stats.accepted_game_submissions }}</p>
+      <p>Pending submissions: <a href="/#/games/game_submissions">{{ stats.pending_game_submissions }}</a></p>
       <hr/>
 
       <p>Installers : {{ stats.installers }}</p>
@@ -34,6 +38,8 @@ export default {
         'published_games': 0,
         'unpublished_games': 0,
         'game_submissions': 0,
+        'accepted_game_submissions': 0,
+        'pending_game_submissions': 0,
         'installers': 0,
         'published_installers': 0,
         'unpublished_installers': 0,
