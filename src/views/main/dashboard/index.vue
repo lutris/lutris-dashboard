@@ -4,6 +4,7 @@
       <p>Games: {{ stats.games }}</p>
       <p>Published games: {{ stats.published_games }}</p>
       <p>Unpublished games: {{ stats.unpublished_games }}</p>
+      <p>Game changes: {{ stats.game_changes }}</p>
       <hr/>
 
       <p>Submissions: {{ stats.game_submissions }}</p>
@@ -38,6 +39,7 @@ export default {
         'games': 0,
         'published_games': 0,
         'unpublished_games': 0,
+        'game_changes': 0,
         'game_submissions': 0,
         'accepted_game_submissions': 0,
         'pending_game_submissions': 0,
