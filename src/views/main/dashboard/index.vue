@@ -9,6 +9,7 @@
       <p>Submissions: {{ stats.game_submissions }}</p>
       <p>Accepted submissions: {{ stats.accepted_game_submissions }}</p>
       <p>Pending submissions: <a href="/#/games/game_submissions">{{ stats.pending_game_submissions }}</a></p>
+      <p>Pending changes: {{ stats.pending_game_changes }}</a></p>
       <hr/>
 
       <p>Installers : {{ stats.installers }}</p>
@@ -40,6 +41,7 @@ export default {
         'game_submissions': 0,
         'accepted_game_submissions': 0,
         'pending_game_submissions': 0,
+        'pending_game_changes': 0,
         'installers': 0,
         'published_installers': 0,
         'unpublished_installers': 0,
