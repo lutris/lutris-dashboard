@@ -34,6 +34,15 @@ export function fetchGameSubmissions() {
   })
 }
 
+
+export function fetchGameChanges() {
+  return request({
+    url: `/api/games/changes`,
+    method: 'get'
+  })
+}
+
+
 export function sendSubmissionAccept(submissionID) {
   return request({
     url: `/api/games/submissions/${submissionID}`,

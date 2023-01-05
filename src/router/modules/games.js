@@ -21,6 +21,12 @@ const route = [
         meta: { title: 'Submissions', noCache: true }
       },
       {
+        path: 'game_changes',
+        component: createNameComponent(() => import('@/views/games/changes.vue')),
+        name: 'GamesChanges',
+        meta: { title: 'Changes', noCache: true }
+      },
+      {
         path: 'merge',
         component: createNameComponent(() => import('@/views/games/merge.vue')),
         name: 'GameMerge',
