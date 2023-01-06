@@ -1,7 +1,7 @@
 <template>
   <el-card>
 
-    <div slot="header">
+    <template #header>
       <a :href="gameURL(game.slug)" target="_blank">
         <img :src="game.banner_url" :alt="game.banner_url" style="float: left; margin-right: 10px;">
         {{ game.name }}
@@ -9,7 +9,7 @@
       <br>
       <el-tag type="success">{{ game.slug }} ({{ game.id }})</el-tag><br>
       <span>Year: {{ game.year }}</span>
-    </div>
+    </template>
 
     <div>
       <p>Users: {{ game.user_count }}</p>
@@ -48,11 +48,10 @@
             icon="Info"
             icon-color="red"
             title="Really delete installer?"
-            @onConfirm="onInstallerDelete(props.row['id'])"
+            @confirm="onInstallerDelete(props.row['id'])"
           >
           <template #reference>
             <el-button
-              slot="reference"
               type="danger"
               icon="Delete"
               circle />
@@ -67,13 +66,13 @@
       </el-table-column>
     </el-table>
     <el-dialog
-      :visible.sync="installerVisible"
+      v-model="installerVisible"
       title="Installer"
       width="50%">
       <pre v-html="installerContent"></pre>
-      <span slot="footer" class="dialog-footer">
+      <template #footer class="dialog-footer">
         <el-button @click="installerVisible = false">Close</el-button>
-      </span>
+      </template>
     </el-dialog>
   </el-card>
 </template>
