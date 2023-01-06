@@ -12,7 +12,7 @@ const route = [
         path: 'index',
         component: createNameComponent(() => import('@/views/games/index.vue')),
         name: 'GamesDashboard',
-        meta: { title: 'Games', noCache: true }
+        meta: { title: 'Search game', noCache: true }
       },
       {
         path: 'game_submissions',
