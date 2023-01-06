@@ -57,7 +57,6 @@ export default {
       this.getSubmissions(this.previousURL)
     },
     onNextClick() {
-      console.log(this.nextURL)
       localStorage.setItem('installerCurrentURL', this.nextURL)
       this.getSubmissions(this.nextURL)
     },
