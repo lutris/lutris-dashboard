@@ -33,6 +33,12 @@ const route = [
         meta: { title: 'Merge', noCache: true }
       },
       {
+        path: 'screenshots',
+        component: createNameComponent(() => import('@/views/games/screenshots.vue')),
+        name: 'Screenshots',
+        meta: { title: 'Screenshots', noCache: true }
+      },
+      {
         path: ':slug',
         component: createNameComponent(() => import('@/views/games/detail.vue')),
         name: 'GameDetail',

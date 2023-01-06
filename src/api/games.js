@@ -56,3 +56,19 @@ export function mergeGames(slug1, slug2) {
     method: 'post'
   })
 }
+
+
+export function fetchGameScreenshots() {
+  return request({
+    url: `/api/games/screenshots`,
+    method: 'get'
+  })
+}
+
+export function sendScreenshotReview(screenshotId, accepted) {
+  return request({
+    url: `/api/games/screenshots/${screenshotId}`,
+    method: 'post',
+    data: {"accepted": accepted}
+  })
+}
