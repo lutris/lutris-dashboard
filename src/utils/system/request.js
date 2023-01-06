@@ -25,7 +25,8 @@ service.interceptors.request.use(
 service.interceptors.response.use(
   (response) => {
     //const res = response.data
-    if (response.status === 200) {
+    const validCodes = [200, 201, 202]
+    if (validCodes.includes(response.status)) {
       return response
     } else {
       showError(response)
@@ -52,7 +53,7 @@ function showError(error) {
       duration: 3 * 1000
     })
   }
-  
+
 }
 
 export default service
