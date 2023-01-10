@@ -2,11 +2,11 @@
   <div class="app-container">
     <p>Total submissions: {{ totalSubmissions }}
       |
-      <a v-if="previousURL" href="#" @click="onPreviousClick">Previous</a>
-      <a v-if="nextURL" href="#" @click="onNextClick">Next</a>
+      <a v-if="previousURL" href="#" @click.prevent="onPreviousClick">Previous</a>
+      <a v-if="nextURL" href="#" @click.prevent="onNextClick">Next</a>
       |
-      <a v-if="order=='newest'" href="#" @click="onSortBy('oldest')">Sort by oldest</a>
-      <a v-if="order=='oldest'" href="#" @click="onSortBy('newest')">Sort by newest</a>
+      <a v-if="order=='newest'" href="#" @click.prevent="onSortBy('oldest')">Sort by oldest</a>
+      <a v-if="order=='oldest'" href="#" @click.prevent="onSortBy('newest')">Sort by newest</a>
     </p>
     <submission-table
       :submissions-loading="submissionsLoading"
@@ -52,17 +52,13 @@ export default {
         this.submissionsLoading = false
       })
     },
-    onPreviousClick(event) {
-      console.log("opifosdifosdiof")
+    onPreviousClick() {
       localStorage.setItem('installerCurrentURL', this.previousURL)
       this.getSubmissions(this.previousURL)
-      event.preventDefault()
     },
-    onNextClick(event) {
-      console.log(this.nextURL)
+    onNextClick() {
       localStorage.setItem('installerCurrentURL', this.nextURL)
       this.getSubmissions(this.nextURL)
-      event.preventDefault()
     },
     onSortBy(order) {
       this.order = order

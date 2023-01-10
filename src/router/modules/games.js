@@ -12,7 +12,7 @@ const route = [
         path: 'index',
         component: createNameComponent(() => import('@/views/games/index.vue')),
         name: 'GamesDashboard',
-        meta: { title: 'Games', noCache: true }
+        meta: { title: 'Search game', noCache: true }
       },
       {
         path: 'game_submissions',
@@ -21,10 +21,22 @@ const route = [
         meta: { title: 'Submissions', noCache: true }
       },
       {
+        path: 'game_changes',
+        component: createNameComponent(() => import('@/views/games/changes.vue')),
+        name: 'GamesChanges',
+        meta: { title: 'Changes', noCache: true }
+      },
+      {
         path: 'merge',
         component: createNameComponent(() => import('@/views/games/merge.vue')),
         name: 'GameMerge',
         meta: { title: 'Merge', noCache: true }
+      },
+      {
+        path: 'screenshots',
+        component: createNameComponent(() => import('@/views/games/screenshots.vue')),
+        name: 'Screenshots',
+        meta: { title: 'Screenshots', noCache: true }
       },
       {
         path: ':slug',

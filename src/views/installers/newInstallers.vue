@@ -2,11 +2,11 @@
   <div class="app-container">
     <p>Total new installers: {{ totalInstallers }}
       |
-      <a v-if="previousURL" href="#" @click="onPreviousClick">Previous</a>
-      <a v-if="nextURL" href="#" @click="onNextClick">Next</a>
+      <a v-if="previousURL" href="#" @click.prevent="onPreviousClick">Previous</a>
+      <a v-if="nextURL" href="#" @click.prevent="onNextClick">Next</a>
       |
-      <a v-if="order=='newest'" href="#" @click="onSortBy('oldest')">Sort by oldest</a>
-      <a v-if="order=='oldest'" href="#" @click="onSortBy('newest')">Sort by newest</a>
+      <a v-if="order=='newest'" href="#" @click.prevent="onSortBy('oldest')">Sort by oldest</a>
+      <a v-if="order=='oldest'" href="#" @click.prevent="onSortBy('newest')">Sort by newest</a>
     </p>
     <new-installers-table
       :loading="loading"
@@ -49,15 +49,13 @@ export default {
         this.loading = false
       })
     },
-    onPreviousClick(event) {
+    onPreviousClick() {
       localStorage.setItem('newInstallersCurrentURL', this.previousURL)
       this.getNewInstallers(this.previousURL)
-      event.preventDefault()
     },
-    onNextClick(event) {
+    onNextClick() {
       localStorage.setItem('newInstallersCurrentURL', this.nextURL)
       this.getNewInstallers(this.nextURL)
-      event.preventDefault()
     },
     onSortBy(order) {
       this.order = order

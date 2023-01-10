@@ -1,7 +1,7 @@
 <template>
   <div>
     <h3>{{ label }}
-      <a class="edit-link" href="#" @click="toggleEditMode">Edit</a>
+      <a class="edit-link" href="#" @click.prevent="toggleEditMode">Edit</a>
     </h3>
     <div v-if="editMode && value" class="diff">
       <textarea
