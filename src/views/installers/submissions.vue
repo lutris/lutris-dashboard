@@ -38,6 +38,7 @@ export default {
     getSubmissions(url) {
       this.submissionsLoading = true
       fetchSubmissions(url, this.order).then(response => {
+        localStorage.setItem('installerCurrentURL', url)
         this.submissions = []
         this.totalSubmissions = response.data.count
         this.nextURL = response.data.next
@@ -53,11 +54,11 @@ export default {
       })
     },
     onPreviousClick() {
-      localStorage.setItem('installerCurrentURL', this.previousURL)
+      // localStorage.setItem('installerCurrentURL', this.previousURL)
       this.getSubmissions(this.previousURL)
     },
     onNextClick() {
-      localStorage.setItem('installerCurrentURL', this.nextURL)
+      // localStorage.setItem('installerCurrentURL', this.nextURL)
       this.getSubmissions(this.nextURL)
     },
     onSortBy(order) {
