@@ -15,7 +15,7 @@
 
       <p>Installers : {{ stats.installers }}</p>
       <p>Published installers: {{ stats.published_installers }}</p>
-      <p>Unpublished installers: {{ stats.unpublished_installers }}</p>
+      <p>Installer submissions: {{ stats.submitted_drafts }}</p>
       <p>Draft installers: {{ stats.drafts }}</p>
       <hr/>
 
@@ -46,7 +46,7 @@ export default {
         'pending_game_changes': 0,
         'installers': 0,
         'published_installers': 0,
-        'unpublished_installers': 0,
+        'submitted_drafts': 0,
         'drafts': 0,
         'screenshots': 0,
         'published_screenshots': 0,
