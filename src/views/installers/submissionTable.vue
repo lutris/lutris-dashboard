@@ -7,7 +7,7 @@
     highlight-current-row>
     <el-table-column label="Comment" prop="comment">
       <template #default="props">
-        <a :href="'#/installers/submissions/' + props.row['id']">{{ props.row["comment"] }}</a>
+        <a :href="'#/installers/submissions/' + props.row['id']">{{ props.row["version"] }}</a>
       </template>
     </el-table-column>
   </el-table>

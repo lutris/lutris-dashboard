@@ -15,7 +15,7 @@ export function fetchSubmissions(url, order = 'newest') {
     url = apiURL.pathname
     paramObj = new URLSearchParams(apiURL.search)
   } else {
-    url = '/api/installers/revisions'
+    url = '/api/installers/drafts'
   }
   paramObj.set('order', order)
   paramObj.set('type', 'submission')
@@ -29,29 +29,12 @@ export function fetchSubmissions(url, order = 'newest') {
 
 export function fetchDrafts() {
   return request({
-    url: '/api/installers/revisions',
+    url: '/api/installers/drafts',
     method: 'get',
     params: { type: 'draft' }
   })
 }
 
-export function fetchNewInstallers(url, order = 'newest') {
-  let paramObj = new URLSearchParams()
-  if (url) {
-    const apiURL = new URL(url)
-    url = apiURL.pathname
-    paramObj = new URLSearchParams(apiURL.search)
-  } else {
-    url = '/api/installers'
-  }
-  paramObj.set('order', order)
-  paramObj.set('status', 'new')
-  return request({
-    url: url,
-    method: 'get',
-    params: paramsToObject(paramObj.entries())
-  })
-}
 
 export function acceptInstaller(installer) {
   if (!installer) {
@@ -75,12 +58,12 @@ export function fetchInstaller(installerId) {
   })
 }
 
-export function fetchSubmission(id) {
+export function fetchDraft(id) {
   if (!id) {
-    throw new Error('Missing submission ID')
+    throw new Error('Missing draft ID')
   }
   return request({
-    url: `/api/installers/revisions/${id}`,
+    url: `/api/installers/drafts/${id}`,
     method: 'get'
   })
 }
@@ -93,20 +76,20 @@ export function fetchRevisions(slug) {
 }
 
 export function acceptSubmission(submission) {
-  const id = submission.revision_id
+  const id = submission.id
   submission.action = 'accept'
   return request({
-    url: `/api/installers/revisions/${id}`,
+    url: `/api/installers/drafts/${id}`,
     method: 'put',
     data: submission
   })
 }
 
 export function rejectSubmission(submission) {
-  const id = submission.revision_id
+  const id = submission.id
   submission.action = 'reject'
   return request({
-    url: `/api/installers/revisions/${id}`,
+    url: `/api/installers/drafts/${id}`,
     method: 'put',
     data: submission
   })

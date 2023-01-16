@@ -44,28 +44,6 @@
             </el-option>
           </el-select>
         </div>
-        <div v-if="originalInstaller">
-          <el-select
-            id="revision-select"
-            v-model="currentRevisionId"
-            placeholder="Choose a revision"
-            name="revisionSelect"
-            style="width: 400px;"
-            @change="onRevisionSelect($event)"
-          >
-            <el-option
-              v-for="revision in getSubmitterRevisions()"
-              :key="revision.revision_id"
-              :value="revision.revision_id"
-            >
-              {{ revision.comment }}
-            </el-option>
-          </el-select>
-          <el-tag v-if="getOtherRevisions().length" type="warning">
-            {{ getOtherRevisions().length }} revisions from other users
-          </el-tag>
-
-        </div>
       </div>
 
       <p v-if="submission.draft" class="warning-message">
@@ -139,7 +117,7 @@
 </template>
 
 <script>
-import { fetchSubmission, fetchRevisions, acceptSubmission, rejectSubmission } from '@/api/installers'
+import { fetchDraft, fetchRevisions, acceptSubmission, rejectSubmission } from '@/api/installers'
 import { ElMessage } from 'element-plus'
 import moment from 'moment'
 import { getGame } from '@/api/games'
@@ -166,7 +144,7 @@ export default {
     }
   },
   computed: {
-    revisionId() {
+    draftId() {
       return this.$route.params && this.$route.params.id
     },
     submittedAt() {
@@ -183,37 +161,16 @@ export default {
   },
   created() {
     this.getSubmission()
-    this.currentRevisionId = this.revisionId
+    this.currentDraftId = this.draftId
   },
   methods: {
     getSubmission() {
       this.submissionLoading = true
-      fetchSubmission(this.revisionId).then(response => {
+      fetchDraft(this.draftId).then(response => {
         this.submission = response.data
         this.submissionsLoading = false
-        this.getRevisions(this.submission.game_slug)
+        this.originalInstaller = this.submission["base_installer"]
       })
-    },
-    getRevisions(slug) {
-      this.revisionsLoading = true
-      fetchRevisions(slug).then(response => {
-        this.revisionsLoading = false
-        this.installers = response.data.installers
-        for (const installer of this.installers) {
-          if (this.submission.installer_id === installer.id) {
-            this.originalInstaller = installer
-            break
-          }
-        }
-      })
-    },
-    // Filter revisions by the author of this submission
-    getSubmitterRevisions() {
-      return this.originalInstaller.revisions.filter(revision => revision.user === this.submission.user)
-    },
-    // Return revisions from different authors
-    getOtherRevisions() {
-      return this.originalInstaller.revisions.filter(revision => revision.user !== this.submission.user)
     },
     onGameSelected(slug) {
       getGame(slug).then(response => {

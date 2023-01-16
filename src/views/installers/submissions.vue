@@ -14,7 +14,7 @@
   </div>
 </template>
 
-<script>
+<script lang="js">
 import SubmissionTable from './submissionTable.vue'
 import { fetchSubmissions } from '@/api/installers'
 export default {
@@ -25,7 +25,7 @@ export default {
       submissions: null,
       submissionsLoading: false,
       totalSubmissions: 0,
-      currentURL: localStorage.getItem('installerCurrentURL'),
+      currentURL: null,
       nextURL: null,
       previousURL: null,
       order: localStorage.getItem('installerSortOrder') || 'newest'
@@ -45,9 +45,6 @@ export default {
         this.previousURL = response.data.previous
         for (let i = 0; i < response.data.results.length; i++) {
           const submission = response.data.results[i]
-          if (submission.version_set.length === 0) {
-            continue
-          }
           this.submissions.push(submission)
         }
         this.submissionsLoading = false

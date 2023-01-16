@@ -33,17 +33,12 @@
       <el-table-column label="Version">
         <template #default="props">
           <strong>{{props.row["version"]}}</strong>
-          <span>{{props.row["is_playable"]}}</span>
+          <span v-if="props.row['is_playable']">✅</span>
         </template>
       </el-table-column>
-      <el-table-column label="Revisions">
+      <el-table-column label="User">
         <template #default="props">
-          <ul v-if="props.row['revisions']">
-            <li v-for="revision in props.row['revisions']" :key="revision.revision_id">
-              <a :href="submissionUrl(revision.revision_id)">Revision by {{ revision.user }} created {{ dateTime(revision.created_at) }}</a>
-              <span v-if="revision.draft">(Draft)</span>
-            </li>
-          </ul>
+          <strong>{{props.row["user"]}}</strong>
         </template>
       </el-table-column>
       <el-table-column label="Actions">

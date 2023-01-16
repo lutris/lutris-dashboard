@@ -29,9 +29,6 @@ export default {
         this.drafts = []
         for (let i = 0; i < response.data.results.length; i++) {
           const draft = response.data.results[i]
-          if (draft.version_set.length === 0) {
-            continue
-          }
           this.drafts.push(draft)
         }
         this.draftsLoading = false

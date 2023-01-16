@@ -15,20 +15,7 @@ const route = [
         meta: { title: 'Submissions', noCache: true }
       },
       {
-        path: 'new',
-        component: createNameComponent(() => import('@/views/installers/newInstallers.vue')),
-        name: 'newInstallers',
-        meta: { title: 'New Installers', noCache: true }
-      },
-      {
-        path: 'new/:id(\\d+)',
-        component: createNameComponent(() => import('@/views/installers/newInstallerDetail.vue')),
-        name: 'newInstallerDetail',
-        meta: { title: 'New Installer', noCache: true },
-        hideMenu: true
-      },
-      {
-        path: 'submissions/drafts',
+        path: 'drafts',
         component: createNameComponent(() => import('@/views/installers/drafts.vue')),
         name: 'Drafts',
         meta: { title: 'Drafts', noCache: true }

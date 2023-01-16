@@ -16,7 +16,7 @@
 
 <script>
 import NewInstallersTable from './newInstallersTable.vue'
-import { fetchNewInstallers } from '@/api/installers'
+
 export default {
   name: 'NewInstallers',
   components: { NewInstallersTable },
@@ -36,18 +36,6 @@ export default {
   },
   methods: {
     getNewInstallers(url) {
-      this.loading = true
-      fetchNewInstallers(url, this.order).then(response => {
-        this.newInstallers = []
-        this.totalInstallers = response.data.count
-        this.nextURL = response.data.next
-        this.previousURL = response.data.previous
-        for (let i = 0; i < response.data.results.length; i++) {
-          const newInstaller = response.data.results[i]
-          this.newInstallers.push(newInstaller)
-        }
-        this.loading = false
-      })
     },
     onPreviousClick() {
       localStorage.setItem('newInstallersCurrentURL', this.previousURL)
