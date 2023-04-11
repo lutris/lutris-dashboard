@@ -24,13 +24,14 @@
     <el-table-column label="Actions" prop="id">
       <template #default="props">
         <el-button type="warning" @click="acceptSubmission(props.row['id'])">Accept</el-button>
+        <el-button type="danger" @click="rejectSubmittion(props.row['id'])">Reject</el-button>
       </template>
     </el-table-column>
   </el-table>
 </template>
 
 <script>
-import { sendSubmissionAccept } from '@/api/games'
+import { sendSubmissionAccept, sendSubmissionReject } from '@/api/games'
 
 export default {
   name: 'GameSubmissionTable',
@@ -56,8 +57,15 @@ export default {
 
     acceptSubmission(submissionId) {
       sendSubmissionAccept(submissionId).then(response => {
-        console.log(response.data)
         if (response.data.accepted) {
+          this.submissions.splice(this.getSubmissionIndex(submissionId), 1)
+        }
+      })
+    },
+
+    rejectSubmittion(submissionId) {
+      sendSubmissionReject(submissionId).then(response => {
+        if (!response.data.accepted) {
           this.submissions.splice(this.getSubmissionIndex(submissionId), 1)
         }
       })

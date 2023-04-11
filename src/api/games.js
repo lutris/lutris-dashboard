@@ -46,7 +46,16 @@ export function fetchGameChanges() {
 export function sendSubmissionAccept(submissionID) {
   return request({
     url: `/api/games/submissions/${submissionID}`,
-    method: 'post'
+    method: 'post',
+    data: {"accepted": true}
+  })
+}
+
+export function sendSubmissionReject(submissionID) {
+  return request({
+    url: `/api/games/submissions/${submissionID}`,
+    method: 'post',
+    data: {"accepted": false}
   })
 }
 
