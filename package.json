@@ -14,7 +14,7 @@
   "dependencies": {
     "@element-plus/icons-vue": "^2.0.10",
     "@vueuse/core": "^9.3.0",
-    "axios": "^1.13.2",
+    "axios": "^1.13.5",
     "dayjs": "^1.11.0",
     "element-plus": "^2.13.1",
     "normalize.css": "^8.0.1",
