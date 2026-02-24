@@ -1,3 +1,25 @@
+function camelToKebab(str) {
+  return str.replace(/([a-z])([A-Z])/g, '$1-$2').toLowerCase()
+}
+
+export function applyTheme(themeName) {
+  const theme = style[themeName] || style['default']
+  const root = document.documentElement
+
+  const sections = { menu: 'menu', logo: 'logo', header: 'header', container: 'container', page: 'page' }
+  for (const [section, prefix] of Object.entries(sections)) {
+    if (!theme[section]) continue
+    for (const [key, value] of Object.entries(theme[section])) {
+      root.style.setProperty(`--system-${prefix}-${camelToKebab(key)}`, value)
+    }
+  }
+
+  if (themeName === 'dark') {
+    root.classList.add('dark')
+  } else {
+    root.classList.remove('dark')
+  }
+}
 
 export const style = {
   'default': {

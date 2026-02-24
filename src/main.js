@@ -19,5 +19,5 @@ app.use(pinia)
 const appStore = useAppStore()
 app.use(ElementPlus, { size: appStore.elementSize })
 app.use(router)
-// app.config.performance = true
+appStore.initTheme()
 app.mount('#app')

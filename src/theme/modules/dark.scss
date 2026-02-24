@@ -1,4 +1,6 @@
 .dark {
+  color-scheme: dark;
+
   p, h1, h2, h3, h4, h5, h6, article {
     color: var(--system-page-color);
   }
@@ -15,6 +17,51 @@
     border-color: var(--system-page-border-color);
     .el-card__header {
       border-color: var(--system-page-border-color);
+    }
+  }
+  .el-table {
+    --el-table-bg-color: var(--system-page-background);
+    --el-table-tr-bg-color: var(--system-page-background);
+    --el-table-header-bg-color: #1b1b1b;
+    --el-table-row-hover-bg-color: #272727;
+    --el-table-text-color: var(--system-page-color);
+    --el-table-header-text-color: var(--system-page-color);
+    --el-table-border-color: var(--system-page-border-color);
+  }
+  .el-dialog {
+    --el-dialog-bg-color: var(--system-page-background);
+    --el-dialog-title-font-size: 18px;
+    color: var(--system-page-color);
+  }
+  .el-input {
+    --el-input-bg-color: #272727;
+    --el-input-text-color: var(--system-page-color);
+    --el-input-border-color: var(--system-page-border-color);
+    --el-input-placeholder-color: #666;
+  }
+  .el-select {
+    --el-select-input-focus-border-color: var(--system-primary-color);
+  }
+  .el-button--default {
+    --el-button-bg-color: #272727;
+    --el-button-text-color: var(--system-page-color);
+    --el-button-border-color: var(--system-page-border-color);
+    --el-button-hover-bg-color: #333;
+    --el-button-hover-text-color: var(--system-primary-color);
+    --el-button-hover-border-color: var(--system-primary-color);
+  }
+  .el-pagination {
+    --el-pagination-bg-color: #272727;
+    --el-pagination-text-color: var(--system-page-color);
+    --el-pagination-button-disabled-bg-color: #1b1b1b;
+  }
+  .el-dropdown-menu {
+    background-color: var(--system-page-background);
+    .el-dropdown-menu__item {
+      color: var(--system-page-color);
+      &:hover {
+        background-color: #272727;
+      }
     }
   }
 }

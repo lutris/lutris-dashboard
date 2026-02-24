@@ -7,6 +7,10 @@
       <Breadcrumb />
     </div>
     <div class="right-box">
+      <div class="theme-toggle" @click="toggleTheme" title="Toggle dark mode">
+        <el-icon v-if="isDark"><Sunny /></el-icon>
+        <el-icon v-else><Moon /></el-icon>
+      </div>
       <div class="user-info">
         <el-dropdown>
           <span class="el-dropdown-link">
@@ -29,22 +33,29 @@ import { defineComponent, computed, reactive } from 'vue'
 import { storeToRefs } from 'pinia'
 import { useAppStore } from '@/stores/app'
 import { useUserStore } from '@/stores/user'
+import { Sunny, Moon } from '@element-plus/icons-vue'
 import Breadcrumb from './Breadcrumb.vue'
 export default defineComponent({
   components: {
-    Breadcrumb
+    Breadcrumb,
+    Sunny,
+    Moon
   },
   setup() {
     const appStore = useAppStore()
     const userStore = useUserStore()
     const { isCollapse } = storeToRefs(appStore)
     const username = computed(() => userStore.info?.username || 'user')
+    const isDark = computed(() => appStore.theme.state.style === 'dark')
     const layer = reactive({
       show: false,
       showButton: true
     })
     const opendStateChange = () => {
       appStore.toggleCollapse()
+    }
+    const toggleTheme = () => {
+      appStore.setThemeStyle(isDark.value ? 'default' : 'dark')
     }
     const loginOut = () => {
       userStore.loginOut()
@@ -53,7 +64,9 @@ export default defineComponent({
       isCollapse,
       layer,
       username,
+      isDark,
       opendStateChange,
+      toggleTheme,
       loginOut
     }
   }
@@ -106,6 +119,20 @@ header {
       :deep(i) {
         color: var(--system-header-text-color);
       }
+    }
+  }
+  .theme-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 18px;
+    color: var(--system-header-text-color);
+    &:hover {
+      background-color: var(--system-header-item-hover-color);
     }
   }
   .user-info {
