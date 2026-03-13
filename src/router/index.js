@@ -11,6 +11,7 @@ import { createNameComponent } from './createNode'
 import Dashboard from './modules/dashboard'
 import Games from './modules/games'
 import Installers from './modules/installers'
+import Regressions from './modules/regressions'
 import System, { catchAllRoute } from './modules/system'
 
 let modules = [...System]
@@ -21,7 +22,7 @@ const router = createRouter({
   history: createWebHashHistory(),
   routes
 })
-let asyncRoutes = [...Dashboard, ...Games, ...Installers]
+let asyncRoutes = [...Dashboard, ...Games, ...Installers, ...Regressions]
 
 let routesInitialized = false
 
