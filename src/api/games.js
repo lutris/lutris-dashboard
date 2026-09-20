@@ -58,6 +58,14 @@ export function sendSubmissionReject(submissionID) {
   })
 }
 
+export function sendSubmissionRejectAndBan(submissionID) {
+  return request({
+    url: `/api/games/submissions/${submissionID}`,
+    method: 'post',
+    data: { accepted: false, ban: true }
+  })
+}
+
 export function mergeGames(slug1, slug2) {
   return request({
     url: `/api/games/${slug1}/merge/${slug2}`,
