@@ -34,6 +34,27 @@
         <span class="user-name">{{ row.user?.username }}</span>
       </template>
     </el-table-column>
+    <el-table-column label="Spam check" width="230">
+      <template #default="{ row }">
+        <div v-if="row.spam_assessment" class="spam-cell">
+          <el-tooltip
+            :disabled="!matchedRules(row).length"
+            placement="left"
+            :content="matchedRules(row).join(', ')">
+            <el-tag :type="verdictTagType(row.spam_assessment.verdict)" size="small">
+              {{ verdictLabel(row.spam_assessment.verdict) }} &middot; {{ row.spam_assessment.score }}
+            </el-tag>
+          </el-tooltip>
+          <span v-if="matchedRules(row).length" class="spam-rules">
+            {{ matchedRules(row).slice(0, 2).join(', ') }}
+            <template v-if="matchedRules(row).length > 2">
+              +{{ matchedRules(row).length - 2 }}
+            </template>
+          </span>
+        </div>
+        <span v-else class="spam-unavailable">&mdash;</span>
+      </template>
+    </el-table-column>
     <el-table-column label="Date" width="120">
       <template #default="{ row }">
         <span class="date-cell" :title="row.created_at">{{ formatDate(row.created_at) }}</span>
@@ -71,6 +92,18 @@ export default {
     formatDate(dateStr) {
       if (!dateStr) return ''
       return dayjs(dateStr).fromNow()
+    },
+
+    matchedRules(row) {
+      return (row.spam_assessment?.matched_rules || []).map(hit => hit.rule)
+    },
+
+    verdictLabel(verdict) {
+      return { spam: 'Spam', uncertain: 'Needs a look', clean: 'Clean' }[verdict] || verdict
+    },
+
+    verdictTagType(verdict) {
+      return { spam: 'danger', uncertain: 'warning', clean: 'success' }[verdict] || 'info'
     },
 
     getSubmissionIndex(submissionId) {
@@ -169,6 +202,26 @@ export default {
 
 .date-cell {
   font-size: 12px;
+  color: var(--system-page-tip-color);
+}
+
+.spam-cell {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2px;
+}
+
+.spam-rules {
+  font-size: 12px;
+  color: var(--system-page-tip-color);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 210px;
+}
+
+.spam-unavailable {
   color: var(--system-page-tip-color);
 }
 </style>
