@@ -27,10 +27,11 @@ export function getGame(slug) {
   })
 }
 
-export function fetchGameSubmissions() {
+export function fetchGameSubmissions(params) {
   return request({
     url: `/api/games/submissions`,
-    method: 'get'
+    method: 'get',
+    params
   })
 }
 
